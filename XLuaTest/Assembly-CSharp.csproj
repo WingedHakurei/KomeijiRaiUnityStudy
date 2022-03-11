@@ -36,8 +36,12 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\XLuaFramework\Scripts\BaseConfig.cs" />
      <Compile Include="Assets\XLuaFramework\Scripts\Singleton.cs" />
+     <Compile Include="Assets\XLuaFramework\Scripts\BaseConfig.cs" />
+     <Compile Include="Assets\XLuaFramework\Scripts\Main.cs" />
+     <Compile Include="Assets\XLuaFramework\Scripts\AssetLoader.cs" />
+     <Compile Include="Assets\XLuaFramework\Scripts\Downloader.cs" />
+     <Compile Include="Assets\XLuaFramework\Scripts\ModuleManager.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Program Files\Unity\2020.3.26f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
