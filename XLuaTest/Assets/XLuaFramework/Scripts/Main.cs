@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    public void Awake()
+    public async void Awake()
     {
         InitGlobal();
 
@@ -14,11 +14,12 @@ public class Main : MonoBehaviour
             moduleUrl = "http://192.168.0.7:8000"
         };
 
-        ModuleManager.Instance.Load(launchModule, (success) =>
+        bool result = await ModuleManager.Instance.Load(launchModule);
+
+        if (result == true)
         {
-            // 在这里把代码控制权交给Lua
             Debug.Log("Lua 代码开始...");
-        });
+        }
     }
     /// <summary>
     /// 初始化全局变量
@@ -29,7 +30,7 @@ public class Main : MonoBehaviour
 
         GlobalConfig.HotUpdate = false;
 
-        GlobalConfig.BundleMode = false;
+        GlobalConfig.BundleMode = true;
 
         DontDestroyOnLoad(gameObject);
     }

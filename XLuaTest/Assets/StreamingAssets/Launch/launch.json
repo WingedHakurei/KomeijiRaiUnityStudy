@@ -1,0 +1,32 @@
+{
+    "BundleArray": {
+        "gassets_launch": {
+            "bundle_name": "gassets_launch",
+            "crc": "ed575cbb",
+            "assets": [
+                "Assets/GAssets/Launch/Sphere.prefab"
+            ]
+        },
+        "gassets_launch_mat": {
+            "bundle_name": "gassets_launch_mat",
+            "crc": "33dce908",
+            "assets": [
+                "Assets/GAssets/Launch/Mat/TestMaterial.mat"
+            ]
+        }
+    },
+    "AssetArray": [
+        {
+            "asset_path": "Assets/GAssets/Launch/Sphere.prefab",
+            "bundle_name": "gassets_launch",
+            "dependencies": [
+                "gassets_launch_mat"
+            ]
+        },
+        {
+            "asset_path": "Assets/GAssets/Launch/Mat/TestMaterial.mat",
+            "bundle_name": "gassets_launch_mat",
+            "dependencies": []
+        }
+    ]
+}

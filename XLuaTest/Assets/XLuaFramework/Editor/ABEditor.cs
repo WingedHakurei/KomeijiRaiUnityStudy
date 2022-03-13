@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
@@ -60,6 +61,8 @@ public class ABEditor : MonoBehaviour
 
             asset2bundle.Clear();
 
+            asset2Dependencies.Clear();
+
             // 开始给这个模块生成AB包文件
 
             ScanChildDirectories(moduleDir);
@@ -86,6 +89,8 @@ public class ABEditor : MonoBehaviour
             );
 
             CalculateDependencies();
+
+            SaveModuleABConfig(moduleName);
 
             AssetDatabase.Refresh();
         }
@@ -208,4 +213,121 @@ public class ABEditor : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 将一个模块的资源依赖关系数据保存成json格式的文件
+    /// </summary>
+    /// <param name="moduleName">模块名字</param>
+    private static void SaveModuleABConfig(string moduleName)
+    {
+        ModuleABConfig moduleABConfig = new ModuleABConfig(asset2bundle.Count);
+
+        // 记录AB包信息
+
+        foreach (AssetBundleBuild build in assetBundleBuildList)
+        {
+            BundleInfo bundleInfo = new BundleInfo();
+
+            bundleInfo.bundle_name = build.assetBundleName;
+
+            bundleInfo.assets = new List<string>();
+
+            foreach (string asset in build.assetNames)
+            {
+                bundleInfo.assets.Add(asset);
+            }
+
+            // 计算一个bundle文件的CRC散列码
+
+            string abFilePath = abOutputPath + "/" + moduleName + "/" + bundleInfo.bundle_name;
+
+            using (FileStream stream = File.OpenRead(abFilePath))
+            {
+                bundleInfo.crc = AssetUtility.GetCRC32Hash(stream);
+            }
+
+            moduleABConfig.AddBundle(bundleInfo.bundle_name, bundleInfo);
+        }
+
+        // 记录每个资源的依赖关系
+
+        int assetIndex = 0;
+
+        foreach (var item in asset2bundle)
+        {
+            AssetInfo assetInfo = new AssetInfo();
+            assetInfo.asset_path = item.Key;
+            assetInfo.bundle_name = item.Value;
+            assetInfo.dependencies = new List<string>();
+
+            bool result = asset2Dependencies.TryGetValue(item.Key, out List<string> dependencies);
+
+            if (result == true)
+            {
+                for (int i = 0; i < dependencies.Count; i++)
+                {
+                    string bundleName = dependencies[i];
+
+                    assetInfo.dependencies.Add(bundleName);
+                }
+            }
+
+            moduleABConfig.AddAsset(assetIndex, assetInfo);
+
+            assetIndex++;
+        }
+
+        // 开始写入Json文件
+
+        string moduleConfigName = moduleName.ToLower() + ".json";
+
+        string jsonPath = abOutputPath + "/" + moduleName + "/" + moduleConfigName;
+
+        if (File.Exists(jsonPath) == true)
+        {
+            File.Delete(jsonPath);
+        }
+
+        File.Create(jsonPath).Dispose();
+
+        string jsonData = LitJson.JsonMapper.ToJson(moduleABConfig);
+
+        File.WriteAllText(jsonPath, ConvertJsonString(jsonData));
+    }
+
+    /// <summary>
+    /// 格式化json
+    /// </summary>
+    /// <param name="str">输入json字符串</param>
+    /// <returns>返回格式化后的字符串</returns>
+    private static string ConvertJsonString(string str)
+    {
+        JsonSerializer serializer = new JsonSerializer();
+
+        TextReader tr = new StringReader(str);
+
+        JsonTextReader jtr = new JsonTextReader(tr);
+
+        object obj = serializer.Deserialize(jtr);
+        if (obj != null)
+        {
+            StringWriter textWriter = new StringWriter();
+
+            JsonTextWriter jsonWriter = new JsonTextWriter(textWriter)
+            {
+                Formatting = Formatting.Indented,
+
+                Indentation = 4,
+
+                IndentChar = ' '
+            };
+
+            serializer.Serialize(jsonWriter, obj);
+
+            return textWriter.ToString();
+        }
+        else
+        {
+            return str;
+        }
+    }
 }
