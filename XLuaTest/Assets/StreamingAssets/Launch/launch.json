@@ -2,8 +2,9 @@
     "BundleArray": {
         "gassets_launch": {
             "bundle_name": "gassets_launch",
-            "crc": "ed575cbb",
+            "crc": "0bd89eec",
             "assets": [
+                "Assets/GAssets/Launch/KomeijiRai.prefab",
                 "Assets/GAssets/Launch/Sphere.prefab"
             ]
         },
@@ -13,9 +14,21 @@
             "assets": [
                 "Assets/GAssets/Launch/Mat/TestMaterial.mat"
             ]
+        },
+        "gassets_launch_sprite": {
+            "bundle_name": "gassets_launch_sprite",
+            "crc": "f34e4c48",
+            "assets": [
+                "Assets/GAssets/Launch/Sprite/KomeijiRai.jpg"
+            ]
         }
     },
     "AssetArray": [
+        {
+            "asset_path": "Assets/GAssets/Launch/KomeijiRai.prefab",
+            "bundle_name": "gassets_launch",
+            "dependencies": []
+        },
         {
             "asset_path": "Assets/GAssets/Launch/Sphere.prefab",
             "bundle_name": "gassets_launch",
@@ -26,6 +39,11 @@
         {
             "asset_path": "Assets/GAssets/Launch/Mat/TestMaterial.mat",
             "bundle_name": "gassets_launch_mat",
+            "dependencies": []
+        },
+        {
+            "asset_path": "Assets/GAssets/Launch/Sprite/KomeijiRai.jpg",
+            "bundle_name": "gassets_launch_sprite",
             "dependencies": []
         }
     ]

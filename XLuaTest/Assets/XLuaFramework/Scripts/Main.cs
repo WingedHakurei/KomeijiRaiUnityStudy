@@ -19,8 +19,27 @@ public class Main : MonoBehaviour
         if (result == true)
         {
             Debug.Log("Lua 代码开始...");
+
+            AssetLoader.Instance.Clone("Launch", "Assets/GAssets/Launch/Sphere.prefab");
+
+            GameObject komeijiRai = AssetLoader.Instance.Clone("Launch", "Assets/GAssets/Launch/KomeijiRai.prefab");
+
+            komeijiRai.GetComponent<SpriteRenderer>().sprite =
+                AssetLoader.Instance.CreateAsset<Sprite>(
+                    "Launch",
+                    "Assets/GAssets/Launch/Sprite/KomeijiRai.jpg",
+                    komeijiRai
+                );
         }
     }
+
+    private void Update()
+    {
+        // 执行卸载策略
+
+        AssetLoader.Instance.Unload(AssetLoader.Instance.base2Assets);
+    }
+
     /// <summary>
     /// 初始化全局变量
     /// </summary>
