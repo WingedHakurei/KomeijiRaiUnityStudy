@@ -11,7 +11,7 @@ public class Main : MonoBehaviour
         {
             moduleName = "Launch",
             moduleVersion = "20220311143900",
-            moduleUrl = "http://192.168.0.7:8000"
+            moduleUrl = "http://192.168.17.1:8000/chfs/shared"
         };
 
         bool result = await ModuleManager.Instance.Load(launchModule);
@@ -28,8 +28,7 @@ public class Main : MonoBehaviour
                 AssetLoader.Instance.CreateAsset<Sprite>(
                     "Launch",
                     "Assets/GAssets/Launch/Sprite/KomeijiRai.jpg",
-                    komeijiRai
-                );
+                    komeijiRai);
         }
     }
 
@@ -47,7 +46,7 @@ public class Main : MonoBehaviour
     {
         Instance = this;
 
-        GlobalConfig.HotUpdate = false;
+        GlobalConfig.HotUpdate = true;
 
         GlobalConfig.BundleMode = true;
 

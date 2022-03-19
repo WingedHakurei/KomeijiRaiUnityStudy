@@ -206,13 +206,22 @@ public class AssetLoader : Singleton<AssetLoader>
             return null;
         }
 
-        bool moduleExist = base2Assets.TryGetValue(moduleName, out Hashtable module2AssetRef);
+        // 先查找 update 路径下的容器，在查找 base 路径下的容器
 
-        if (moduleExist == false)
+        BaseOrUpdate witch = BaseOrUpdate.Update;
+
+        Hashtable module2AssetRef;
+
+        if (base2Assets.TryGetValue(moduleName, out module2AssetRef) == false)
         {
-            Debug.LogError("未找到资源对应的模块：moduleName " + moduleName + " assetPath " + assetPath);
+            witch = BaseOrUpdate.Base;
 
-            return null;
+            if (base2Assets.TryGetValue(moduleName, out module2AssetRef) == false)
+            {
+                Debug.LogError("未找到资源对应的模块，moduleName " + moduleName + " assetPath " + assetPath);
+
+                return null;
+            }
         }
 
         AssetRef assetRef = module2AssetRef[assetPath] as AssetRef;
@@ -235,9 +244,8 @@ public class AssetLoader : Singleton<AssetLoader>
         {
             if (oneBundleRef.bundle == null)
             {
-                string bundlePath = BundlePath(moduleName, oneBundleRef.bundleInfo.bundle_name);
-
-                oneBundleRef.bundle = AssetBundle.LoadFromFile(bundlePath);
+                oneBundleRef.bundle = AssetBundle.LoadFromFile(
+                    BundlePath(witch, moduleName, oneBundleRef.bundleInfo.bundle_name));
             }
 
             if (oneBundleRef.children == null)
@@ -254,9 +262,8 @@ public class AssetLoader : Singleton<AssetLoader>
 
         if (bundleRef.bundle == null)
         {
-            string bundlePath = BundlePath(moduleName, bundleRef.bundleInfo.bundle_name);
-
-            bundleRef.bundle = AssetBundle.LoadFromFile(bundlePath);
+            bundleRef.bundle = AssetBundle.LoadFromFile(
+                BundlePath(witch, moduleName, bundleRef.bundleInfo.bundle_name));
         }
 
         if (bundleRef.children == null)
@@ -285,12 +292,20 @@ public class AssetLoader : Singleton<AssetLoader>
     /// <summary>
     /// 工具函数 根据模块名字和 bundle 名字，返回其实际资源路径
     /// </summary>
+    /// <param name="baseOrUpdate"></param>
     /// <param name="moduleName"></param>
     /// <param name="bundleName"></param>
     /// <returns></returns>
-    private string BundlePath(string moduleName, string bundleName)
+    private string BundlePath(BaseOrUpdate baseOrUpdate, string moduleName, string bundleName)
     {
-        return Application.streamingAssetsPath + "/" + moduleName + "/" + bundleName;
+        if (baseOrUpdate == BaseOrUpdate.Update)
+        {
+            return Application.persistentDataPath + "/Bundles/" + moduleName + "/" + bundleName;
+        }
+        else
+        {
+            return Application.streamingAssetsPath + "/" + moduleName + "/" + bundleName;
+        }
     }
 
     /// <summary>
@@ -299,6 +314,11 @@ public class AssetLoader : Singleton<AssetLoader>
     /// Value 模块所有的资源
     /// </summary>
     public Dictionary<string, Hashtable> base2Assets;
+
+    /// <summary>
+    /// 平台对应的可读可写路径
+    /// </summary>
+    public Dictionary<string, Hashtable> update2Assets;
 
     /// <summary>
     /// 模块资源加载器的构造函数
@@ -360,27 +380,13 @@ public class AssetLoader : Singleton<AssetLoader>
     /// <summary>
     /// 加载模块对应的全局AssetBundle资源管理文件
     /// </summary>
+    /// <param name="baseOrUpdate"></param>
     /// <param name="moduleName"></param>
+    /// <param name="bundleConfigName"></param>
     /// <returns></returns>
-    public async Task<ModuleABConfig> LoadAssetBundleConfig(string moduleName)
+    public async Task<ModuleABConfig> LoadAssetBundleConfig(BaseOrUpdate baseOrUpdate, string moduleName, string bundleConfigName)
     {
-#if UNITY_EDITOR
-        if (GlobalConfig.BundleMode == false)
-        {
-            return null;
-        }
-        else
-        {
-            return await LoadAssetBundleConfig_Runtime(moduleName);
-        }
-#else
-        return await LoadAssetBundleConfig_Runtime(moduleName);
-#endif
-    }
-
-    public async Task<ModuleABConfig> LoadAssetBundleConfig_Runtime(string moduleName)
-    {
-        string url = Application.streamingAssetsPath + "/" + moduleName + "/" + moduleName.ToLower() + ".json";
+        string url = BundlePath(baseOrUpdate, moduleName, bundleConfigName);
 
         UnityWebRequest request = UnityWebRequest.Get(url);
 

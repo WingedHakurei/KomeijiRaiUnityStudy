@@ -1,0 +1,1 @@
+call "D:\Program Files\CuteHttpFileServer\chfs.exe" --path="%cd%" --port=8000
