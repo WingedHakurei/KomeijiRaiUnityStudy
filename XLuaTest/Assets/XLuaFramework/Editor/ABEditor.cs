@@ -243,6 +243,10 @@ public class ABEditor : MonoBehaviour
             using (FileStream stream = File.OpenRead(abFilePath))
             {
                 bundleInfo.crc = AssetUtility.GetCRC32Hash(stream);
+
+                // 计算一个bundle文件的大小
+
+                bundleInfo.size = (int)stream.Length;
             }
 
             moduleABConfig.AddBundle(bundleInfo.bundle_name, bundleInfo);

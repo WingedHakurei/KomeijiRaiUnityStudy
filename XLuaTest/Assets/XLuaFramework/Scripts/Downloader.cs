@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,7 +16,7 @@ public class Downloader : Singleton<Downloader>
     /// </summary>
     /// <param name="moduleConfig"></param>
     /// <returns></returns>
-    public async Task<bool> Download(ModuleConfig moduleConfig)
+    public async Task Download(ModuleConfig moduleConfig)
     {
         // 用来存放热更下来的资源的本地路径
 
@@ -36,19 +37,178 @@ public class Downloader : Singleton<Downloader>
 
         if (string.IsNullOrEmpty(request.error) == false)
         {
-            return false;
+            Debug.LogWarning($"下载模块{moduleConfig.moduleName}的AB配置文件：{request.error}");
+
+            bool result = await ShowMessageBox("网络异常，请检查网络后点击 继续下载", "继续下载", "退出游戏");
+
+            if (result == false)
+            {
+                Application.Quit();
+
+                return;
+            }
+
+            await Download(moduleConfig);
+
+            return;
         }
 
-        List<BundleInfo> downloadList = await GetDownloadList(moduleConfig.moduleName);
+        Tuple<List<BundleInfo>, BundleInfo[]> tuple = await GetDownloadList(moduleConfig.moduleName);
 
-        List<BundleInfo> remainList = await ExecuteDownload(moduleConfig, downloadList);
+        List<BundleInfo> downloadList = tuple.Item1;
 
-        if (remainList.Count > 0)
+        BundleInfo[] removeList = tuple.Item2;
+
+        long downloadSize = CalculateSize(downloadList);
+
+        if (downloadSize == 0L)
         {
-            return false;
+            return;
         }
 
-        return true;
+        bool boxResult = await ShowMessageBox(moduleConfig, downloadSize);
+
+        if (boxResult == false)
+        {
+            Application.Quit();
+
+            return;
+        }
+
+        await ExecuteDownload(moduleConfig, downloadList);
+
+        Clear(moduleConfig, removeList);
+
+        return;
+    }
+
+    /// <summary>
+    /// 模块热更新完成后的善后工作
+    /// </summary>
+    /// <param name="moduleConfig"></param>
+    /// <param name="removeList"></param>
+    private void Clear(ModuleConfig moduleConfig, BundleInfo[] removeList)
+    {
+        string moduleName = moduleConfig.moduleName;
+
+        string updatePath = GetUpdatePath(moduleName);
+
+        for (int i = removeList.Length - 1; i >= 0; i--)
+        {
+            BundleInfo bundleInfo = removeList[i];
+
+            string filePath = $"{updatePath}/{bundleInfo.bundle_name}";
+
+            File.Delete(filePath);
+        }
+
+        // 删除旧的配置文件
+
+        string oldFile = $"{updatePath}/{moduleName.ToLower()}.json";
+
+        if (File.Exists(oldFile))
+        {
+            File.Delete(oldFile);
+        }
+
+        // 用新的配置文件替代之
+
+        string newFile = $"{updatePath}/{moduleName.ToLower()}_temp.json";
+
+        File.Move(newFile, oldFile);
+    }
+
+    /// <summary>
+    /// 计算需要下载的资源大小 单位是字节
+    /// </summary>
+    /// <param name="bundleList"></param>
+    /// <returns></returns>
+    private long CalculateSize(List<BundleInfo> bundleList)
+    {
+        long totalSize = 0L;
+
+        foreach (BundleInfo bundleInfo in bundleList)
+        {
+            totalSize += bundleInfo.size;
+        }
+
+        return totalSize;
+    }
+
+    /// <summary>
+    /// 弹出对话框
+    /// </summary>
+    /// <param name="moduleConfig"></param>
+    /// <param name="totalSize"></param>
+    /// <returns></returns>
+    private async Task<bool> ShowMessageBox(ModuleConfig moduleConfig, long totalSize)
+    {
+        string downloadSize = SizeToString(totalSize);
+
+        string messageInfo = $"发现新版本，版本号为：{moduleConfig.moduleVersion}\n需要下载热更包，大小为：{downloadSize}";
+
+        MessageBox messageBox = new MessageBox(messageInfo, "开始下载", "退出游戏");
+
+        MessageBox.BoxResult result = await messageBox.GetReplyAsync();
+
+        messageBox.Close();
+
+        if (result == MessageBox.BoxResult.First)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private async Task<bool> ShowMessageBox(string messageInfo, string first, string second)
+    {
+        MessageBox messageBox = new MessageBox(messageInfo, first, second);
+
+        MessageBox.BoxResult result = await messageBox.GetReplyAsync();
+
+        messageBox.Close();
+
+        if (result == MessageBox.BoxResult.First)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 工具函数 把字节数转换成字符串形式
+    /// </summary>
+    /// <param name="size"></param>
+    /// <returns></returns>
+    string SizeToString(long size)
+    {
+        string sizeStr = "";
+
+        if (size >= 1024 * 1024)
+        {
+            long m = size / (1024 * 1024);
+
+            size = size % (1024 * 1024);
+
+            sizeStr += $"{m}[M]";
+        }
+
+        if (size >= 1024)
+        {
+            long k = size / 1024;
+
+            size = size % 1024;
+
+            sizeStr += $"{k}[K]";
+        }
+
+        long b = size;
+
+        sizeStr += $"{b}[B]";
+
+        return sizeStr;
     }
 
     /// <summary>
@@ -83,7 +243,7 @@ public class Downloader : Singleton<Downloader>
     /// </summary>
     /// <param name="moduleName"></param>
     /// <returns></returns>
-    private async Task<List<BundleInfo>> GetDownloadList(string moduleName)
+    private async Task<Tuple<List<BundleInfo>, BundleInfo[]>> GetDownloadList(string moduleName)
     {
         ModuleABConfig serverConfig = await AssetLoader.Instance.LoadAssetBundleConfig(
             BaseOrUpdate.Update,
@@ -103,9 +263,7 @@ public class Downloader : Singleton<Downloader>
         // 注意，这里不用判断 localConfig 是否存在，本地的 localConfig 确实可能不存在
         // 比如在此模块第一次热更新之前，本地 update 路径下啥都没有
 
-        List<BundleInfo> diffList = CalculateDiff(moduleName, localConfig, serverConfig);
-
-        return diffList;
+        return CalculateDiff(moduleName, localConfig, serverConfig);
     }
 
     /// <summary>
@@ -115,7 +273,7 @@ public class Downloader : Singleton<Downloader>
     /// <param name="localConfig"></param>
     /// <param name="serverConfig"></param>
     /// <returns></returns>
-    private List<BundleInfo> CalculateDiff(string moduleName, ModuleABConfig localConfig, ModuleABConfig serverConfig)
+    private Tuple<List<BundleInfo>, BundleInfo[]> CalculateDiff(string moduleName, ModuleABConfig localConfig, ModuleABConfig serverConfig)
     {
 
         List<BundleInfo> bundleList = new List<BundleInfo>();
@@ -133,6 +291,7 @@ public class Downloader : Singleton<Downloader>
         }
 
         // 找到那些差异的 bundle 文件，放到 bundleList 容器中
+        // 对于那些遗留在本地的无用的 bundle 文件，把它过滤在 localBundleDic 容器里
 
         foreach (BundleInfo bundleInfo in serverConfig.BundleArray.Values)
         {
@@ -148,37 +307,9 @@ public class Downloader : Singleton<Downloader>
             }
         }
 
-        string updatePath = GetUpdatePath(moduleName);
-
-        // 对于那些遗留在本地的无用的 bundle 文件，要清除，不然本地文件越积越多
-
         BundleInfo[] removeList = localBundleDic.Values.ToArray();
 
-        for (int i = removeList.Length - 1; i >= 0; i--)
-        {
-            BundleInfo bundleInfo = removeList[i];
-
-            string filePath = $"{updatePath}/{bundleInfo.bundle_name}";
-
-            File.Delete(filePath);
-        }
-
-        // 删除旧的配置文件
-
-        string oldFile = $"{updatePath}/{moduleName.ToLower()}.json";
-
-        if (File.Exists(oldFile))
-        {
-            File.Delete(oldFile);
-        }
-
-        // 用新的配置文件替代之
-
-        string newFile = $"{updatePath}/{moduleName.ToLower()}_temp.json";
-
-        File.Move(newFile, oldFile);
-
-        return bundleList;
+        return new Tuple<List<BundleInfo>, BundleInfo[]>(bundleList, removeList);
     }
 
     /// <summary>
@@ -187,7 +318,7 @@ public class Downloader : Singleton<Downloader>
     /// <param name="moduleConfig"></param>
     /// <param name="bundleList"></param>
     /// <returns>返回的 List 包含的是还未下载的 Bundle</returns>
-    private async Task<List<BundleInfo>> ExecuteDownload(ModuleConfig moduleConfig, List<BundleInfo> bundleList)
+    private async Task ExecuteDownload(ModuleConfig moduleConfig, List<BundleInfo> bundleList)
     {
         while (bundleList.Count > 0)
         {
@@ -214,7 +345,21 @@ public class Downloader : Singleton<Downloader>
             }
         }
 
-        return bundleList;
+        if (bundleList.Count > 0)
+        {
+            bool result = await ShowMessageBox("网络异常，请检查网络后点击 继续下载", "继续下载", "退出游戏");
+
+            if (result == false)
+            {
+                Application.Quit();
+
+                return;
+            }
+
+            await ExecuteDownload(moduleConfig, bundleList);
+
+            return;
+        }
     }
 
 }

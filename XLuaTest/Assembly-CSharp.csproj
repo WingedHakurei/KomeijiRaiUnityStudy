@@ -36,26 +36,27 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\AwaitExtensions.cs" />
      <Compile Include="Assets\XLuaFramework\Scripts\Main.cs" />
+     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Tests\AsyncUtilTests.cs" />
+     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Tests\Util\TestButtonHandler.cs" />
+     <Compile Include="Assets\XLuaFramework\Scripts\AssetRef.cs" />
+     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\TaskExtensions.cs" />
      <Compile Include="Assets\XLuaFramework\Scripts\Downloader.cs" />
+     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\WaitForBackgroundThread.cs" />
+     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\Internal\SyncContextUtil.cs" />
      <Compile Include="Assets\XLuaFramework\Scripts\ModuleABConfig.cs" />
+     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\IEnumeratorAwaitExtensions.cs" />
+     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\Internal\AsyncCoroutineRunner.cs" />
+     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\Awaiters.cs" />
      <Compile Include="Assets\XLuaFramework\Scripts\ModuleManager.cs" />
      <Compile Include="Assets\XLuaFramework\Scripts\AssetLoader.cs" />
      <Compile Include="Assets\XLuaFramework\Scripts\Singleton.cs" />
-     <Compile Include="Assets\XLuaFramework\Scripts\AssetUtility.cs" />
-     <Compile Include="Assets\XLuaFramework\Scripts\BaseConfig.cs" />
-     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\Internal\SyncContextUtil.cs" />
-     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\WaitForBackgroundThread.cs" />
-     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\TaskExtensions.cs" />
-     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Tests\Util\TestButtonHandler.cs" />
-     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\Internal\AsyncCoroutineRunner.cs" />
-     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\AwaitExtensions.cs" />
-     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Tests\AsyncUtilTests.cs" />
-     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\Awaiters.cs" />
-     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\WaitForUpdate.cs" />
-     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\IEnumeratorAwaitExtensions.cs" />
      <Compile Include="Assets\XLuaFramework\Scripts\BundleRef.cs" />
-     <Compile Include="Assets\XLuaFramework\Scripts\AssetRef.cs" />
+     <Compile Include="Assets\XLuaFramework\Scripts\AssetUtility.cs" />
+     <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\WaitForUpdate.cs" />
+     <Compile Include="Assets\XLuaFramework\Scripts\BaseConfig.cs" />
+     <Compile Include="Assets\XLuaFramework\Scripts\MessageBox.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Program Files\Unity\2020.3.26f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

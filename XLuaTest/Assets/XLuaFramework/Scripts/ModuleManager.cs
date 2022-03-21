@@ -27,10 +27,7 @@ public class ModuleManager : Singleton<ModuleManager>
         }
         else
         {
-            if (await Downloader.Instance.Download(moduleConfig) == false)
-            {
-                return false;
-            }
+            await Downloader.Instance.Download(moduleConfig);
 
             bool baseOk = await LoadBase(moduleConfig.moduleName);
 

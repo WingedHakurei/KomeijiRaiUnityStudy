@@ -3,6 +3,7 @@
         "gassets_launch": {
             "bundle_name": "gassets_launch",
             "crc": "0bd89eec",
+            "size": 3040,
             "assets": [
                 "Assets/GAssets/Launch/KomeijiRai.prefab",
                 "Assets/GAssets/Launch/Sphere.prefab"
@@ -11,6 +12,7 @@
         "gassets_launch_mat": {
             "bundle_name": "gassets_launch_mat",
             "crc": "33dce908",
+            "size": 27205,
             "assets": [
                 "Assets/GAssets/Launch/Mat/TestMaterial.mat"
             ]
@@ -18,6 +20,7 @@
         "gassets_launch_sprite": {
             "bundle_name": "gassets_launch_sprite",
             "crc": "f34e4c48",
+            "size": 122997,
             "assets": [
                 "Assets/GAssets/Launch/Sprite/KomeijiRai.jpg"
             ]
