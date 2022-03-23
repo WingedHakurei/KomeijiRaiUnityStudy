@@ -63,6 +63,8 @@ public class Downloader : Singleton<Downloader>
 
         if (downloadSize == 0L)
         {
+            Clear(moduleConfig, removeList);
+
             return;
         }
 
@@ -245,20 +247,16 @@ public class Downloader : Singleton<Downloader>
     /// <returns></returns>
     private async Task<Tuple<List<BundleInfo>, BundleInfo[]>> GetDownloadList(string moduleName)
     {
-        ModuleABConfig serverConfig = await AssetLoader.Instance.LoadAssetBundleConfig(
-            BaseOrUpdate.Update,
-            moduleName,
-            moduleName.ToLower() + "_temp.json");
+        ModuleABConfig serverConfig = await AssetLoader.Instance.LoadModuleABConfig(
+            BaseOrUpdate.Update, moduleName, moduleName.ToLower() + "_temp.json");
 
         if (serverConfig == null)
         {
             return null;
         }
 
-        ModuleABConfig localConfig = await AssetLoader.Instance.LoadAssetBundleConfig(
-            BaseOrUpdate.Update,
-            moduleName,
-            moduleName.ToLower() + ".json");
+        ModuleABConfig localConfig = await AssetLoader.Instance.LoadModuleABConfig(
+            BaseOrUpdate.Update, moduleName, moduleName.ToLower() + ".json");
 
         // 注意，这里不用判断 localConfig 是否存在，本地的 localConfig 确实可能不存在
         // 比如在此模块第一次热更新之前，本地 update 路径下啥都没有

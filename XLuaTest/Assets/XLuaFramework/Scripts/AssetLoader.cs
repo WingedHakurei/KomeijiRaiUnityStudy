@@ -206,22 +206,15 @@ public class AssetLoader : Singleton<AssetLoader>
             return null;
         }
 
-        // 先查找 update 路径下的容器，在查找 base 路径下的容器
-
-        BaseOrUpdate witch = BaseOrUpdate.Update;
-
         Hashtable module2AssetRef;
 
-        if (base2Assets.TryGetValue(moduleName, out module2AssetRef) == false)
+        if (GlobalConfig.HotUpdate == true)
         {
-            witch = BaseOrUpdate.Base;
-
-            if (base2Assets.TryGetValue(moduleName, out module2AssetRef) == false)
-            {
-                Debug.LogError("未找到资源对应的模块，moduleName " + moduleName + " assetPath " + assetPath);
-
-                return null;
-            }
+            module2AssetRef = update2Assets[moduleName];
+        }
+        else
+        {
+            module2AssetRef = base2Assets[moduleName];
         }
 
         AssetRef assetRef = module2AssetRef[assetPath] as AssetRef;
@@ -245,7 +238,7 @@ public class AssetLoader : Singleton<AssetLoader>
             if (oneBundleRef.bundle == null)
             {
                 oneBundleRef.bundle = AssetBundle.LoadFromFile(
-                    BundlePath(witch, moduleName, oneBundleRef.bundleInfo.bundle_name));
+                    BundlePath(oneBundleRef.witch, moduleName, oneBundleRef.bundleInfo.bundle_name));
             }
 
             if (oneBundleRef.children == null)
@@ -263,7 +256,7 @@ public class AssetLoader : Singleton<AssetLoader>
         if (bundleRef.bundle == null)
         {
             bundleRef.bundle = AssetBundle.LoadFromFile(
-                BundlePath(witch, moduleName, bundleRef.bundleInfo.bundle_name));
+                BundlePath(bundleRef.witch, moduleName, bundleRef.bundleInfo.bundle_name));
         }
 
         if (bundleRef.children == null)
@@ -321,11 +314,21 @@ public class AssetLoader : Singleton<AssetLoader>
     public Dictionary<string, Hashtable> update2Assets;
 
     /// <summary>
+    /// 记录所有的 BundleRef 对象（不管是 base 还是 update 路径）
+    /// 键是 bundle 的名字
+    /// </summary>
+    public Dictionary<string, BundleRef> name2BundleRef;
+
+    /// <summary>
     /// 模块资源加载器的构造函数
     /// </summary>
     public AssetLoader()
     {
         base2Assets = new Dictionary<string, Hashtable>();
+
+        update2Assets = new Dictionary<string, Hashtable>();
+
+        name2BundleRef = new Dictionary<string, BundleRef>();
     }
 
     /// <summary>
@@ -335,17 +338,6 @@ public class AssetLoader : Singleton<AssetLoader>
     /// <returns></returns>
     public Hashtable ConfigAssembly(ModuleABConfig moduleABConfig)
     {
-        Dictionary<string, BundleRef> name2BundleRef = new Dictionary<string, BundleRef>();
-
-        foreach (KeyValuePair<string, BundleInfo> keyValue in moduleABConfig.BundleArray)
-        {
-            string bundleName = keyValue.Key;
-
-            BundleInfo bundleInfo = keyValue.Value;
-
-            name2BundleRef[bundleName] = new BundleRef(bundleInfo);
-        }
-
         Hashtable path2AssetRef = new Hashtable();
 
         for (int i = 0; i < moduleABConfig.AssetArray.Length; i++)
@@ -384,7 +376,7 @@ public class AssetLoader : Singleton<AssetLoader>
     /// <param name="moduleName"></param>
     /// <param name="bundleConfigName"></param>
     /// <returns></returns>
-    public async Task<ModuleABConfig> LoadAssetBundleConfig(BaseOrUpdate baseOrUpdate, string moduleName, string bundleConfigName)
+    public async Task<ModuleABConfig> LoadModuleABConfig(BaseOrUpdate baseOrUpdate, string moduleName, string bundleConfigName)
     {
         string url = BundlePath(baseOrUpdate, moduleName, bundleConfigName);
 

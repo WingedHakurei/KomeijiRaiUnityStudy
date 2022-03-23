@@ -12,6 +12,11 @@ public class BundleRef
     public BundleInfo bundleInfo;
 
     /// <summary>
+    /// 记录这个 BundleRef 对应的AB文件需要从哪里加载
+    /// </summary>
+    public BaseOrUpdate witch;
+
+    /// <summary>
     /// 加载到内存的 bundle 对象
     /// </summary>
     public AssetBundle bundle;
@@ -25,8 +30,10 @@ public class BundleRef
     /// BundleRef 的构造函数
     /// </summary>
     /// <param name="bundleInfo"></param>
-    public BundleRef(BundleInfo bundleInfo)
+    public BundleRef(BundleInfo bundleInfo, BaseOrUpdate witch)
     {
         this.bundleInfo = bundleInfo;
+
+        this.witch = witch;
     }
 }

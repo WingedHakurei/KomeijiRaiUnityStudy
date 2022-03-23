@@ -27,7 +27,7 @@ public class Main : MonoBehaviour
             komeijiRai.GetComponent<SpriteRenderer>().sprite =
                 AssetLoader.Instance.CreateAsset<Sprite>(
                     "Launch",
-                    "Assets/GAssets/Launch/Sprite/KomeijiRai.jpg",
+                    "Assets/GAssets/Launch/Sprite/KomeijiRai.png",
                     komeijiRai);
         }
     }

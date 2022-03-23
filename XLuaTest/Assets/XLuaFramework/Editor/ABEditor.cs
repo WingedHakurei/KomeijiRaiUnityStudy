@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using LitJson;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
@@ -37,8 +38,7 @@ public class ABEditor : MonoBehaviour
     /// <summary>
     /// 打包AssetBundle资源
     /// </summary>
-    [MenuItem("ABEditor/BuildAssetBundle")]
-    public static void BuildAssetBundle()
+    private static void BuildAssetBundle()
     {
         Debug.Log("开始--->>>生成所有模块的AB包！");
 
@@ -93,9 +93,169 @@ public class ABEditor : MonoBehaviour
             SaveModuleABConfig(moduleName);
 
             AssetDatabase.Refresh();
+
+            DeleteManifest(moduleOutputPath);
+
+            File.Delete(moduleOutputPath + "/" + moduleName);
         }
 
         Debug.Log("结束--->>>生成所有模块的AB包！");
+    }
+
+    /// <summary>
+    /// 删除 Unity 帮我们生成的 .manifest 文件，我们是不需要的
+    /// </summary>
+    /// <param name="moduleOutputPath"></param>
+    private static void DeleteManifest(string moduleOutputPath)
+    {
+        FileInfo[] files = new DirectoryInfo(moduleOutputPath).GetFiles();
+
+        foreach (FileInfo file in files)
+        {
+            if (file.Name.EndsWith(".manifest"))
+            {
+                file.Delete();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 开发模式打包资源
+    /// </summary>
+    [MenuItem("ABEditor/BuildAssetBundle_Dev")]
+    public static void BuildAssetBundle_Dev()
+    {
+        abOutputPath = Application.streamingAssetsPath;
+
+        BuildAssetBundle();
+    }
+
+    /// <summary>
+    /// 打大版本的资源
+    /// </summary>
+    [MenuItem("ABEditor/BuildAssetBundle_Base")]
+    public static void BuildAssetBundle_Base()
+    {
+        abOutputPath = Application.dataPath + "/../AssetBundle_Base";
+
+        BuildAssetBundle();
+    }
+
+    /// <summary>
+    /// 打热更的资源
+    /// </summary>
+    [MenuItem("ABEditor/BuildAssetBundle_Update")]
+    public static void BuildAssetBundle_Update()
+    {
+        // 1. 先在 AssetBundle_Update 文件夹中把AB包都生成出来
+
+        abOutputPath = Application.dataPath + "/../AssetBundle_Update";
+
+        BuildAssetBundle();
+
+        // 2. 再和 AssetBundle_Base 的版本比对，删除那些和 AssetBundle_Base 版本一样的资源
+
+        string baseABPath = Application.dataPath + "/../AssetBundle_Base";
+
+        string updateABPath = abOutputPath;
+
+        DirectoryInfo baseDir = new DirectoryInfo(baseABPath);
+
+        // 遍历 baseABPath 下的所有模块
+
+        DirectoryInfo[] dirs = baseDir.GetDirectories();
+
+        foreach (DirectoryInfo moduleDir in dirs)
+        {
+            string moduleName = moduleDir.Name;
+
+            ModuleABConfig baseABConfig = LoadABConfig(baseABPath + "/" + moduleName + "/" + moduleName.ToLower() + ".json");
+
+            ModuleABConfig updateABConfig = LoadABConfig(updateABPath + "/" + moduleName + "/" + moduleName.ToLower() + ".json");
+
+            // 计算出那些跟 base 版本相比，没有变化的 bundle 文件，即需要从热更包中删除的文件
+
+            List<BundleInfo> removeList = Calculate(baseABConfig, updateABConfig);
+
+            foreach (BundleInfo info in removeList)
+            {
+                string filePath = updateABPath + "/" + moduleName + "/" + info.bundle_name;
+
+                File.Delete(filePath);
+
+                // 同时要处理一下热更包版本里的AB资源配置文件
+
+                updateABConfig.BundleArray.Remove(info.bundle_name);
+            }
+
+            // 重新生成热更包的AB资源配置文件
+
+            string jsonPath = updateABPath + "/" + moduleName + "/" + moduleName.ToLower() + ".json";
+
+            if (File.Exists(jsonPath) == true)
+            {
+                File.Delete(jsonPath);
+            }
+
+            File.Create(jsonPath).Dispose();
+
+            string jsonData = LitJson.JsonMapper.ToJson(updateABConfig);
+
+            File.WriteAllText(jsonPath, ConvertJsonString(jsonData));
+        }
+    }
+
+    /// <summary>
+    /// 打包工具的工具函数
+    /// </summary>
+    /// <param name="abConfigPath"></param>
+    /// <returns></returns>
+    private static ModuleABConfig LoadABConfig(string abConfigPath)
+    {
+        File.ReadAllText(abConfigPath);
+
+        return JsonMapper.ToObject<ModuleABConfig>(File.ReadAllText(abConfigPath));
+    }
+
+    /// <summary>
+    /// 计算热更包中需要删除的 bundle 文件
+    /// </summary>
+    /// <param name="baseABConfig"></param>
+    /// <param name="updateABConfig"></param>
+    /// <returns></returns>
+    private static List<BundleInfo> Calculate(ModuleABConfig baseABConfig, ModuleABConfig updateABConfig)
+    {
+        // 收集所有的 base 版本的 bundle 文件，放到这个 baseBundleDic 字典中
+
+        Dictionary<string, BundleInfo> baseBundleDic = new Dictionary<string, BundleInfo>();
+
+        if (baseABConfig != null)
+        {
+            foreach (BundleInfo bundleInfo in baseABConfig.BundleArray.Values)
+            {
+                string uniqueId = $"{bundleInfo.bundle_name} | {bundleInfo.crc}";
+
+                baseBundleDic.Add(uniqueId, bundleInfo);
+            }
+        }
+
+        // 遍历 update 版本中的 bundle 文件，把那些需要删除的 bundle 放入下面的 removeList 容器中
+
+        List<BundleInfo> removeList = new List<BundleInfo>();
+
+        foreach (BundleInfo bundleInfo in updateABConfig.BundleArray.Values)
+        {
+            string uniqueId = $"{bundleInfo.bundle_name} | {bundleInfo.crc}";
+
+            // 找到那些重复的 bundle 文件，从 removeList 容器中删除
+
+            if (baseBundleDic.ContainsKey(uniqueId) == true)
+            {
+                removeList.Add(bundleInfo);
+            }
+        }
+
+        return removeList;
     }
 
     /// <summary>
@@ -104,7 +264,7 @@ public class ABEditor : MonoBehaviour
     /// 2. 并且递归遍历这个文件夹下的所有子文件夹
     /// </summary>
     /// <param name="directoryInfo"></param>
-    static void ScanChildDirectories(DirectoryInfo directoryInfo)
+    private static void ScanChildDirectories(DirectoryInfo directoryInfo)
     {
 
         // 收集当前路径下的文件 把它们打成一个AB包
@@ -125,7 +285,7 @@ public class ABEditor : MonoBehaviour
     /// 遍历当前路径下的文件 把它们打成一个AB包
     /// </summary>
     /// <param name="directoryInfo"></param>
-    static void ScanCurDirectory(DirectoryInfo directoryInfo)
+    private static void ScanCurDirectory(DirectoryInfo directoryInfo)
     {
         List<string> assetNames = new List<string>();
 

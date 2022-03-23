@@ -1,0 +1,36 @@
+{
+    "BundleArray": {
+        "gassets_launch_sprite": {
+            "bundle_name": "gassets_launch_sprite",
+            "crc": "e1551f5e",
+            "size": 127636,
+            "assets": [
+                "Assets/GAssets/Launch/Sprite/KomeijiRai.png"
+            ]
+        }
+    },
+    "AssetArray": [
+        {
+            "asset_path": "Assets/GAssets/Launch/KomeijiRai.prefab",
+            "bundle_name": "gassets_launch",
+            "dependencies": []
+        },
+        {
+            "asset_path": "Assets/GAssets/Launch/Sphere.prefab",
+            "bundle_name": "gassets_launch",
+            "dependencies": [
+                "gassets_launch_mat"
+            ]
+        },
+        {
+            "asset_path": "Assets/GAssets/Launch/Mat/TestMaterial.mat",
+            "bundle_name": "gassets_launch_mat",
+            "dependencies": []
+        },
+        {
+            "asset_path": "Assets/GAssets/Launch/Sprite/KomeijiRai.png",
+            "bundle_name": "gassets_launch_sprite",
+            "dependencies": []
+        }
+    ]
+}
