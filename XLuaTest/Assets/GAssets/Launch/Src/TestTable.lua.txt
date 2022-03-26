@@ -1,0 +1,56 @@
+TestTable = {}
+
+-- 测试 PB 的序列化和反序列化
+function TestTable:TestPB(gameObject)
+    local CreateAssetT = xlua.get_generic_method(CS.AssetLoader, "CreateAsset")
+    local CreateAsset = CreateAssetT(CS.UnityEngine.TextAsset)
+    local protoString = CreateAsset(CS.AssetLoader.Instance, "Launch",
+                            "Assets/GAssets/Launch/Res/Proto/login3b.proto.txt", gameObject).text
+
+    local parser = (require("protoc")).new()
+    assert(parser:load(protoString, "login3b.proto"))
+
+    local data = {
+        name = 'KomeijiRai',
+        age = 22,
+        address = '辽宁省大连市',
+        contacts = {{
+            name = '恋恋',
+            phonenumber = 114514
+        }, {
+            name = '地雷',
+            phonenumber = 123456
+        }}
+    }
+
+    local pb = require "pb"
+
+    -- 序列化成字节流
+
+    local bytes = assert(pb.encode('Person', data))
+    print(pb.tohex(bytes))
+
+    -- 反序列化成lua的table
+
+    local data2 = assert(pb.decode('Person', bytes))
+    print(data2.name)
+    print(data2.age)
+    print(data2.address)
+    print(data2.contacts[1].name)
+    print(data2.contacts[1].phonenumber)
+    print(data2.contacts[2].name)
+    print(data2.contacts[2].phonenumber)
+end
+
+-- 测试RapidJson
+
+function TestTable:TestJson()
+    local rapidJson = require('rapidjson')
+    local t = rapidJson.decode('{"a":123}')
+    print(t.a)
+    t.a = 456
+    local s = rapidJson.encode(t)
+    print('json', s)
+end
+
+return TestTable

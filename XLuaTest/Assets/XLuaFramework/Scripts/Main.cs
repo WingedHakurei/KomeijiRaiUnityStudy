@@ -1,10 +1,15 @@
+using System.IO;
 using UnityEngine;
+using XLua;
+using static XLua.LuaEnv;
 
 public class Main : MonoBehaviour
 {
     public async void Awake()
     {
         InitGlobal();
+
+        InitCustomLoaders();
 
         // 启动模块
         ModuleConfig launchModule = new ModuleConfig()
@@ -20,15 +25,7 @@ public class Main : MonoBehaviour
         {
             Debug.Log("Lua 代码开始...");
 
-            AssetLoader.Instance.Clone("Launch", "Assets/GAssets/Launch/Sphere.prefab");
-
-            GameObject komeijiRai = AssetLoader.Instance.Clone("Launch", "Assets/GAssets/Launch/KomeijiRai.prefab");
-
-            komeijiRai.GetComponent<SpriteRenderer>().sprite =
-                AssetLoader.Instance.CreateAsset<Sprite>(
-                    "Launch",
-                    "Assets/GAssets/Launch/Sprite/KomeijiRai.png",
-                    komeijiRai);
+            gameObject.AddComponent<MonoProxy>().BindScript("Launch", "Main");
         }
     }
 
@@ -46,12 +43,56 @@ public class Main : MonoBehaviour
     {
         Instance = this;
 
-        GlobalConfig.HotUpdate = true;
+        GlobalConfig.HotUpdate = false;
 
-        GlobalConfig.BundleMode = true;
+        GlobalConfig.BundleMode = false;
 
         DontDestroyOnLoad(gameObject);
     }
+
+    /// <summary>
+    /// 整个工程共享一个 LuaEnv 对象
+    /// </summary>
+    /// <returns></returns>
+    public LuaEnv luaEnv { get; } = new LuaEnv();
+
+    /// <summary>
+    /// 初始化自定义 Lua 加载器
+    /// </summary>
+    private void InitCustomLoaders()
+    {
+        DirectoryInfo baseDir = new DirectoryInfo(Application.dataPath + "/GAssets");
+
+        // 遍历所有模块
+
+        DirectoryInfo[] dirs = baseDir.GetDirectories();
+
+        foreach (DirectoryInfo moduleDir in dirs)
+        {
+            string moduleName = moduleDir.Name;
+
+            CustomLoader loader = (ref string scriptPath) =>
+            {
+                string assetPath = "Assets/GAssets/" + moduleName + "/Src/" + scriptPath.Trim() + ".lua.txt";
+
+                TextAsset asset = AssetLoader.Instance.CreateAsset<TextAsset>("Launch", assetPath, Main.Instance.gameObject);
+
+                if (asset != null)
+                {
+                    string scriptString = asset.text;
+
+                    byte[] result = System.Text.Encoding.UTF8.GetBytes(scriptString);
+
+                    return result;
+                }
+
+                return null;
+            };
+
+            luaEnv.AddLoader(loader);
+        }
+    }
+
     /// <summary>
     /// 主Mono对象
     /// </summary>

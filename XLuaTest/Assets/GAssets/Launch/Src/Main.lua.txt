@@ -1,0 +1,16 @@
+Main = {}
+
+function Main:Awake()
+    print(self.MonoProxy.gameObject.name)
+end
+
+function Main:Start()
+    local testTable = require "TestTable"
+    testTable:TestPB(self.MonoProxy.gameObject)
+    testTable.TestJson()
+end
+
+function Main:OnDestroy()
+end
+
+return Main
