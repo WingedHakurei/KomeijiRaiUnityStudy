@@ -1,0 +1,264 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "GateServer/1.0.0": {
+        "dependencies": {
+          "DotNetty.Buffers": "0.7.0",
+          "DotNetty.Codecs": "0.7.0",
+          "DotNetty.Common": "0.7.0",
+          "DotNetty.Handlers": "0.7.0",
+          "DotNetty.Transport": "0.7.0",
+          "Google.Protobuf": "3.19.0"
+        },
+        "runtime": {
+          "GateServer.dll": {}
+        }
+      },
+      "DotNetty.Buffers/0.7.0": {
+        "dependencies": {
+          "DotNetty.Common": "0.7.0",
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/DotNetty.Buffers.dll": {
+            "assemblyVersion": "0.7.0.0",
+            "fileVersion": "0.7.0.0"
+          }
+        }
+      },
+      "DotNetty.Codecs/0.7.0": {
+        "dependencies": {
+          "DotNetty.Buffers": "0.7.0",
+          "DotNetty.Common": "0.7.0",
+          "DotNetty.Transport": "0.7.0",
+          "System.Collections.Immutable": "1.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/DotNetty.Codecs.dll": {
+            "assemblyVersion": "0.7.0.0",
+            "fileVersion": "0.7.0.0"
+          }
+        }
+      },
+      "DotNetty.Common/0.7.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging": "5.0.0",
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/DotNetty.Common.dll": {
+            "assemblyVersion": "0.7.0.0",
+            "fileVersion": "0.7.0.0"
+          }
+        }
+      },
+      "DotNetty.Handlers/0.7.0": {
+        "dependencies": {
+          "DotNetty.Buffers": "0.7.0",
+          "DotNetty.Codecs": "0.7.0",
+          "DotNetty.Common": "0.7.0",
+          "DotNetty.Transport": "0.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/DotNetty.Handlers.dll": {
+            "assemblyVersion": "0.7.0.0",
+            "fileVersion": "0.7.0.0"
+          }
+        }
+      },
+      "DotNetty.Transport/0.7.0": {
+        "dependencies": {
+          "DotNetty.Buffers": "0.7.0",
+          "DotNetty.Common": "0.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/DotNetty.Transport.dll": {
+            "assemblyVersion": "0.7.0.0",
+            "fileVersion": "0.7.0.0"
+          }
+        }
+      },
+      "Google.Protobuf/3.19.0": {
+        "runtime": {
+          "lib/net5.0/Google.Protobuf.dll": {
+            "assemblyVersion": "3.19.0.0",
+            "fileVersion": "3.19.0.0"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection/5.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.Extensions.DependencyInjection.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/5.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging/5.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Options": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.Extensions.Logging.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/5.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          }
+        }
+      },
+      "Microsoft.Extensions.Options/5.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Primitives": "5.0.0"
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.Extensions.Options.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          }
+        }
+      },
+      "Microsoft.Extensions.Primitives/5.0.0": {
+        "runtime": {
+          "lib/netcoreapp3.0/Microsoft.Extensions.Primitives.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          }
+        }
+      },
+      "System.Collections.Immutable/1.5.0": {},
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {}
+    }
+  },
+  "libraries": {
+    "GateServer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DotNetty.Buffers/0.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-p32YJtFdyTdCo9V6+QhCTpKCmsoWqzHlBoXhSdLE9Q5CVV+/sP7sm3heWerr2SkGPnoYCZ1N9kbCNPbBMJ4RsQ==",
+      "path": "dotnetty.buffers/0.7.0",
+      "hashPath": "dotnetty.buffers.0.7.0.nupkg.sha512"
+    },
+    "DotNetty.Codecs/0.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ehRJECZW6XiJ6kMvbE+ZWcN//90AvipHBMQusjMM2Fk2FelsVKZHqdS+2wnH2ZndtcGL6YjlGNnH7q7WhMxxtA==",
+      "path": "dotnetty.codecs/0.7.0",
+      "hashPath": "dotnetty.codecs.0.7.0.nupkg.sha512"
+    },
+    "DotNetty.Common/0.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WRAUucHVaJNpWkQZKZa2a/6e4U9jRZgbqOZt5ijxDs4qDlUifbXcklWb0jTI2+Qtc1eL+RfiRobrzzDvsfetDQ==",
+      "path": "dotnetty.common/0.7.0",
+      "hashPath": "dotnetty.common.0.7.0.nupkg.sha512"
+    },
+    "DotNetty.Handlers/0.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HwZ5wPrFgGgySBHgkjgRdFfqT6YO27gHr3wTM2yJds+de5SBOXhGQadv5ShexWlJy4Gf4Tqg2o83FRwNyOWPcw==",
+      "path": "dotnetty.handlers/0.7.0",
+      "hashPath": "dotnetty.handlers.0.7.0.nupkg.sha512"
+    },
+    "DotNetty.Transport/0.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0wn64e3ldQgznsHxgsNsuVVktfkEsNUBzIn43Acst4o07w2zmmIboDNf6/tyMdC6EJRRasrzVJ4lIwI+C1hPGA==",
+      "path": "dotnetty.transport/0.7.0",
+      "hashPath": "dotnetty.transport.0.7.0.nupkg.sha512"
+    },
+    "Google.Protobuf/3.19.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WHfgqb0R6IaoB2bN18OkaDABA2bP4gz9NPYD41nKhaporyBclQlXThQtxGic7Hc4Ip0B/Avw6xZDjx9vb/3XuQ==",
+      "path": "google.protobuf/3.19.0",
+      "hashPath": "google.protobuf.3.19.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Rc2kb/p3Ze6cP6rhFC3PJRdWGbLvSHZc0ev7YlyeU6FmHciDMLrhoVoTUEzKPhN5ZjFgKF1Cf5fOz8mCMIkvpA==",
+      "path": "microsoft.extensions.dependencyinjection/5.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.5.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ORj7Zh81gC69TyvmcUm9tSzytcy8AVousi+IVRAI8nLieQjOFryRusSFh7+aLk16FN9pQNqJAiMd7BTKINK0kA==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/5.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MgOwK6tPzB6YNH21wssJcw/2MKwee8b2gI7SllYfn6rvTpIrVvVS5HAjSU2vqSku1fwqRvWP0MdIi14qjd93Aw==",
+      "path": "microsoft.extensions.logging/5.0.0",
+      "hashPath": "microsoft.extensions.logging.5.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NxP6ahFcBnnSfwNBi2KH2Oz8Xl5Sm2krjId/jRR3I7teFphwiUoUeZPwTNA21EX+5PtjqmyAvKaOeBXcJjcH/w==",
+      "path": "microsoft.extensions.logging.abstractions/5.0.0",
+      "hashPath": "microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Options/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CBvR92TCJ5uBIdd9/HzDSrxYak+0W/3+yxrNg8Qm6Bmrkh5L+nu6m3WeazQehcZ5q1/6dDA7J5YdQjim0165zg==",
+      "path": "microsoft.extensions.options/5.0.0",
+      "hashPath": "microsoft.extensions.options.5.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Primitives/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cI/VWn9G1fghXrNDagX9nYaaB/nokkZn0HYAawGaELQrl8InSezfe9OnfPZLcJq3esXxygh3hkq2c3qoV3SDyQ==",
+      "path": "microsoft.extensions.primitives/5.0.0",
+      "hashPath": "microsoft.extensions.primitives.5.0.0.nupkg.sha512"
+    },
+    "System.Collections.Immutable/1.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EXKiDFsChZW0RjrZ4FYHu9aW6+P4MCgEDCklsVseRfhoO0F+dXeMSsMRAlVXIo06kGJ/zv+2w1a2uc2+kxxSaQ==",
+      "path": "system.collections.immutable/1.5.0",
+      "hashPath": "system.collections.immutable.1.5.0.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA==",
+      "path": "system.runtime.compilerservices.unsafe/5.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+    }
+  }
+}

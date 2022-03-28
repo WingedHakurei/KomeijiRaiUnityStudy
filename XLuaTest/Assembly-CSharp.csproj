@@ -58,6 +58,7 @@
      <Compile Include="Assets\XLuaFramework\External\XLua\Src\LuaBase.cs" />
      <Compile Include="Assets\XLuaFramework\Scripts\ModuleABConfig.cs" />
      <Compile Include="Assets\XLuaFramework\External\XLua\Tutorial\LuaCallCSharp\LuaCallCs.cs" />
+     <Compile Include="Assets\XLuaFramework\Scripts\TCPClient.cs" />
      <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\IEnumeratorAwaitExtensions.cs" />
      <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\Internal\AsyncCoroutineRunner.cs" />
      <Compile Include="Assets\XLuaFramework\External\XLua\Src\GenAttributes.cs" />
@@ -86,12 +87,13 @@
      <Compile Include="Assets\XLuaFramework\External\XLua\Src\InternalGlobals.cs" />
      <Compile Include="Assets\XLuaFramework\External\AsyncAwaitUtil\Source\WaitForUpdate.cs" />
      <Compile Include="Assets\XLuaFramework\Scripts\BaseConfig.cs" />
-     <Compile Include="Assets\XLuaFramework\Scripts\TCPClient.cs" />
      <None Include="Assets\XLuaFramework\External\XLua\Tutorial\LoadLuaScript\ByFile\Resources\byfile.lua.txt" />
      <None Include="Assets\GAssets\Launch\Res\Proto\login3b.proto.txt" />
+     <None Include="Assets\XLuaFramework\External\UniRx\ReadMe.txt" />
      <None Include="Assets\XLuaFramework\External\XLua\Resources\xlua\util.lua.txt" />
      <None Include="Assets\GAssets\Launch\Src\Main.lua.txt" />
      <None Include="Assets\GAssets\Launch\Src\protoc.lua.txt" />
+     <None Include="Assets\GAssets\Launch\Res\Proto\LaunchPB.proto.txt" />
      <None Include="Assets\XLuaFramework\External\XLua\Resources\perf\profiler.lua.txt" />
      <None Include="Assets\XLuaFramework\External\XLua\Resources\perf\memory.lua.txt" />
      <None Include="Assets\XLuaFramework\External\XLua\Resources\tdr\tdr.lua.txt" />
@@ -705,6 +707,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="UniRx.csproj">
+      <Project>{4836b213-d39e-db6a-3a83-08f2ce935b52}</Project>
+      <Name>UniRx</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

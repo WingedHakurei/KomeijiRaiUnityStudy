@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package LaunchPB;
+
+enum ProtoCode
+{
+    E_HeatBeat = 0;
+
+    E_Hero = 1;
+}
+
+message Hero
+{
+    string name = 1;
+    int32 age = 2;
+}

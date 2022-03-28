@@ -1,4 +1,5 @@
 using System;
+using UniRx;
 using UnityEngine;
 using XLua;
 
@@ -49,6 +50,15 @@ public class MonoProxy : MonoBehaviour
     private void Start()
     {
         luaStart?.Invoke(luaTable);
+    }
+
+    /// <summary>
+    /// 给 MonoProxy 对应的 Lua 脚本绑定一个 Update 方法！按需使用！
+    /// </summary>
+    /// <param name="action"></param>
+    public void BindUpdate(Action action)
+    {
+        Observable.EveryUpdate().Subscribe(_ => { action(); }).AddTo(this);
     }
 
     private void OnDestroy()
