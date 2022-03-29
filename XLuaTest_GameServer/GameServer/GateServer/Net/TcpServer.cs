@@ -5,37 +5,30 @@ using DotNetty.Handlers.Timeout;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
+using Orleans;
 
 namespace GateServer.Net
 {
-    public static class TcpServer
+    public class TcpServer
     {
+        private IEventLoopGroup bossGroup;
+
+        private IEventLoopGroup workerGroup;
+
+        private IChannel bootstrapChannel;
+
+        private readonly IClusterClient client;
+
+        public TcpServer(IClusterClient client)
+        {
+            this.client = client;
+        }
+
         /// <summary>
         /// 启动 TcpServer
         /// </summary>
-        /// <param name="port"></param>
         /// <returns></returns>
-        public static Task Start(int port)
-        {
-            return RunServerAsync(port);
-        }
-
-        /// <summary>
-        /// 关闭 TcpServer
-        /// </summary>
-        /// <returns></returns>
-        public static async Task Stop()
-        {
-            await Task.WhenAll(
-                bootstrapChannel.CloseAsync(),
-                bossGroup.ShutdownGracefullyAsync(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2)),
-                workerGroup.ShutdownGracefullyAsync(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2))
-            );
-
-            Console.WriteLine("关闭网关服务器成功！");
-        }
-
-        private static async Task RunServerAsync(int port)
+        public async Task StartAsync()
         {
             // 主工作组
 
@@ -76,12 +69,12 @@ namespace GateServer.Net
 
                         pipeline.AddLast("IdleChecker", new IdleStateHandler(50, 50, 0));
 
-                        pipeline.AddLast(new TcpServerEncoder(), new TcpServerDecoder(), new TcpServerHandler());
+                        pipeline.AddLast(new TcpServerEncoder(), new TcpServerDecoder(), new TcpServerHandler(client));
                     }));
 
-                bootstrapChannel = await bootstrap.BindAsync(port);
+                bootstrapChannel = await bootstrap.BindAsync(8899);
 
-                Console.WriteLine($"启动网关服务器成功！监听端口号：{port}");
+                Console.WriteLine($"启动网关服务器成功！监听端口号：8899");
             }
             catch (Exception e)
             {
@@ -91,10 +84,20 @@ namespace GateServer.Net
             }
         }
 
-        private static IChannel bootstrapChannel;
+        /// <summary>
+        /// 关闭 TcpServer
+        /// </summary>
+        /// <returns></returns>
+        public async Task Stop()
+        {
+            await Task.WhenAll(
+                bootstrapChannel.CloseAsync(),
+                bossGroup.ShutdownGracefullyAsync(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2)),
+                workerGroup.ShutdownGracefullyAsync(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2))
+            );
 
-        private static IEventLoopGroup bossGroup;
+            Console.WriteLine("关闭网关服务器成功！");
+        }
 
-        private static IEventLoopGroup workerGroup;
     }
 }

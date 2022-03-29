@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
-using Google.Protobuf;
+using IGrains;
 
 namespace GateServer.Net
 {
@@ -59,25 +59,15 @@ namespace GateServer.Net
 
                 input.ReadBytes(bodyData);
 
-                if (protoID == (int)LaunchPB.ProtoCode.EHero)
+                // 包装成一个 NetPackage 对象
+
+                NetPackage netPackage = new NetPackage()
                 {
-                    // 将包体字节流反序列化成PB对象
+                    protoID = protoID,
+                    bodyData = bodyData
+                };
 
-                    IMessage message = new LaunchPB.Hero();
-
-                    LaunchPB.Hero hero = message.Descriptor.Parser.ParseFrom(bodyData, 0, bodyLength) as LaunchPB.Hero;
-
-                    // 将PB对象包装成 TcpMessage 对象，然后放到 output 队列中
-
-                    TcpMessage oneMessage = new TcpMessage()
-                    {
-                        protoID = protoID,
-                        message = message,
-                        type = typeof(LaunchPB.Hero)
-                    };
-
-                    output.Add(oneMessage);
-                }
+                output.Add(netPackage);
             }
             catch (Exception e)
             {

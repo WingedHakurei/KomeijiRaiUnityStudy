@@ -1,0 +1,70 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "IGrains/1.0.0": {
+        "dependencies": {
+          "Microsoft.Orleans.CodeGenerator.MSBuild": "3.5.0",
+          "Microsoft.Orleans.Core.Abstractions": "3.5.0"
+        },
+        "runtime": {
+          "IGrains.dll": {}
+        }
+      },
+      "Microsoft.Orleans.CodeGenerator.MSBuild/3.5.0": {},
+      "Microsoft.Orleans.Core.Abstractions/3.5.0": {
+        "dependencies": {
+          "System.Memory": "4.5.3",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Orleans.Core.Abstractions.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "System.Memory/4.5.3": {},
+      "System.Threading.Tasks.Extensions/4.5.4": {}
+    }
+  },
+  "libraries": {
+    "IGrains/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Orleans.CodeGenerator.MSBuild/3.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-62aowTFWeUX4ic9TvVsWyfOBOnQdAaxgc9+TLcqRLMsLCRptxSCGKPXbnpB0erO0ed500qfrRqewz5+3F7beVA==",
+      "path": "microsoft.orleans.codegenerator.msbuild/3.5.0",
+      "hashPath": "microsoft.orleans.codegenerator.msbuild.3.5.0.nupkg.sha512"
+    },
+    "Microsoft.Orleans.Core.Abstractions/3.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-K/DgLldIpORZ+PsFIT14ucmZfcZuzn0hVwH1+vo/bxZOXglOlcSe4lK6tYwdUKecMJSgP+TcavXTiVYLZE9gVg==",
+      "path": "microsoft.orleans.core.abstractions/3.5.0",
+      "hashPath": "microsoft.orleans.core.abstractions.3.5.0.nupkg.sha512"
+    },
+    "System.Memory/4.5.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
+      "path": "system.memory/4.5.3",
+      "hashPath": "system.memory.4.5.3.nupkg.sha512"
+    },
+    "System.Threading.Tasks.Extensions/4.5.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg==",
+      "path": "system.threading.tasks.extensions/4.5.4",
+      "hashPath": "system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    }
+  }
+}

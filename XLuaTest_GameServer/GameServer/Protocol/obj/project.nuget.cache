@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "kvbH0zx9+//lPFb8dHfpt6qS2GHrk71PwFIRXjgSimYtu5prQRQNQzJew2dU9UgPxqDR/z1HeO/txvJSqNzygQ==",
+  "success": true,
+  "projectFilePath": "d:\\git\\KomeijiRaiUnityStudy\\XLuaTest_GameServer\\GameServer\\Protocol\\Protocol.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\狮子头零冲\\.nuget\\packages\\google.protobuf\\3.19.0\\google.protobuf.3.19.0.nupkg.sha512"
+  ],
+  "logs": []
+}

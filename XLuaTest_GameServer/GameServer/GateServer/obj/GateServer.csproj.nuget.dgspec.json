@@ -32,7 +32,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "d:\\git\\KomeijiRaiUnityStudy\\XLuaTest_GameServer\\GameServer\\IGrains\\IGrains.csproj": {
+                "projectPath": "d:\\git\\KomeijiRaiUnityStudy\\XLuaTest_GameServer\\GameServer\\IGrains\\IGrains.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -68,6 +72,79 @@
             "Google.Protobuf": {
               "target": "Package",
               "version": "[3.19.0, )"
+            },
+            "Microsoft.Orleans.Client": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "d:\\git\\KomeijiRaiUnityStudy\\XLuaTest_GameServer\\GameServer\\IGrains\\IGrains.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "d:\\git\\KomeijiRaiUnityStudy\\XLuaTest_GameServer\\GameServer\\IGrains\\IGrains.csproj",
+        "projectName": "IGrains",
+        "projectPath": "d:\\git\\KomeijiRaiUnityStudy\\XLuaTest_GameServer\\GameServer\\IGrains\\IGrains.csproj",
+        "packagesPath": "C:\\Users\\狮子头零冲\\.nuget\\packages\\",
+        "outputPath": "d:\\git\\KomeijiRaiUnityStudy\\XLuaTest_GameServer\\GameServer\\IGrains\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\狮子头零冲\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.Orleans.CodeGenerator.MSBuild": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            },
+            "Microsoft.Orleans.Core.Abstractions": {
+              "target": "Package",
+              "version": "[3.5.0, )"
             }
           },
           "imports": [

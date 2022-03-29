@@ -1,0 +1,12 @@
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\bin\Debug\net5.0\Protocol.deps.json
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\bin\Debug\net5.0\Protocol.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\bin\Debug\net5.0\ref\Protocol.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\bin\Debug\net5.0\Protocol.pdb
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\obj\Debug\net5.0\Protocol.csproj.AssemblyReference.cache
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\obj\Debug\net5.0\Protocol.GeneratedMSBuildEditorConfig.editorconfig
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\obj\Debug\net5.0\Protocol.AssemblyInfoInputs.cache
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\obj\Debug\net5.0\Protocol.AssemblyInfo.cs
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\obj\Debug\net5.0\Protocol.csproj.CoreCompileInputs.cache
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\obj\Debug\net5.0\Protocol.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\obj\Debug\net5.0\ref\Protocol.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Protocol\obj\Debug\net5.0\Protocol.pdb

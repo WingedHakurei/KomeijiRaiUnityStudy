@@ -1,0 +1,14 @@
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\bin\Debug\net5.0\IGrains.deps.json
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\bin\Debug\net5.0\IGrains.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\bin\Debug\net5.0\ref\IGrains.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\bin\Debug\net5.0\IGrains.pdb
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\obj\Debug\net5.0\IGrains.csproj.AssemblyReference.cache
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\obj\Debug\net5.0\IGrains.orleans.g.args.txt
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\obj\Debug\net5.0\IGrains.orleans.g.cs
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\obj\Debug\net5.0\IGrains.GeneratedMSBuildEditorConfig.editorconfig
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\obj\Debug\net5.0\IGrains.AssemblyInfoInputs.cache
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\obj\Debug\net5.0\IGrains.AssemblyInfo.cs
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\obj\Debug\net5.0\IGrains.csproj.CoreCompileInputs.cache
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\obj\Debug\net5.0\IGrains.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\obj\Debug\net5.0\ref\IGrains.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\IGrains\obj\Debug\net5.0\IGrains.pdb

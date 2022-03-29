@@ -2,23 +2,23 @@ using System;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
-using Google.Protobuf;
+using IGrains;
 
 namespace GateServer.Net
 {
-    public class TcpServerEncoder : MessageToByteEncoder<TcpMessage>
+    public class TcpServerEncoder : MessageToByteEncoder<NetPackage>
     {
-        protected override void Encode(IChannelHandlerContext context, TcpMessage oneMessage, IByteBuffer output)
+        protected override void Encode(IChannelHandlerContext context, NetPackage netPackage, IByteBuffer output)
         {
-            byte[] body = oneMessage.message.ToByteArray();
+            byte[] body = netPackage.bodyData;
 
             output.WriteInt(body.Length);
 
-            output.WriteInt(oneMessage.protoID);
+            output.WriteInt(netPackage.protoID);
 
             output.WriteBytes(body);
 
-            Console.WriteLine($"{context.Channel.RemoteAddress.ToString()} 发送协议 {oneMessage.type} 数据！");
+            Console.WriteLine($"{context.Channel.RemoteAddress.ToString()} 发送数据！");
         }
     }
 }

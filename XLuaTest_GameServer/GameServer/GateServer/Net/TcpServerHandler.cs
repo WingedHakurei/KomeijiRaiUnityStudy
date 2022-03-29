@@ -1,41 +1,42 @@
 using System;
 using DotNetty.Transport.Channels;
+using IGrains;
+using Orleans;
 
 namespace GateServer.Net
 {
     /// <summary>
     /// 实现 TcpServer 的处理器
     /// </summary>
-    public class TcpServerHandler : SimpleChannelInboundHandler<TcpMessage>
+    public class TcpServerHandler : SimpleChannelInboundHandler<NetPackage>
     {
-        protected override void ChannelRead0(IChannelHandlerContext context, TcpMessage msg)
+        private readonly IClusterClient client;
+
+        private IPacketRouterGrain routerGrain;
+
+        private PacketObserver packetObserver;
+
+        public TcpServerHandler(IClusterClient client)
         {
-            Console.WriteLine($"{context.Channel.RemoteAddress.ToString()} 收到协议 {msg.type} 数据！");
+            this.client = client;
+        }
 
-            if (msg.type == typeof(LaunchPB.Hero))
-            {
-                LaunchPB.Hero hero = msg.message as LaunchPB.Hero;
-
-                hero.Name = "KomeijiRai";
-
-                hero.Age = 22;
-
-                // 返回给客户端
-
-                TcpMessage respMessage = new TcpMessage()
-                {
-                    protoID = msg.protoID,
-                    message = hero,
-                    type = typeof(LaunchPB.Hero)
-                };
-
-                context.WriteAndFlushAsync(respMessage);
-            }
+        protected override void ChannelRead0(IChannelHandlerContext context, NetPackage netPackage)
+        {
+            routerGrain.OnReceivePacket(netPackage);
         }
 
         public override void ChannelActive(IChannelHandlerContext context)
         {
             base.ChannelActive(context);
+
+            routerGrain = client.GetGrain<IPacketRouterGrain>(123);
+
+            packetObserver = new PacketObserver(context);
+
+            IPacketObserver observerRef = client.CreateObjectReference<IPacketObserver>(packetObserver).Result;
+
+            routerGrain.BindPacketObserver(observerRef).Wait();
 
             Console.WriteLine($"{context.Channel.RemoteAddress.ToString()} 连接成功！");
         }
