@@ -1,4 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Common;
+using Common.DB;
+using Common.ORM;
 using GateServer.Net;
 using Orleans;
 using Orleans.Configuration;
@@ -11,13 +16,38 @@ namespace GateServer
 
         private static TcpServer tcpServer;
 
+        private static Table<Person> personDB = new Table<Person>();
+
         static async Task Main(string[] args)
         {
+            Logger.Create("GateServer");
+
+            TestDB();
+
             await ConnectClient();
 
             tcpServer = new TcpServer(client);
 
             await tcpServer.StartAsync();
+
+            Console.ReadKey();
+        }
+
+        private static void TestDB()
+        {
+            Person person = new Person("张三", 8, Guid.NewGuid().ToString(), GenderEnum.男);
+
+            person.Students = new List<Person>()
+            {
+                new Person("张小三1", 8, Guid.NewGuid().ToString(), GenderEnum.男),
+                new Person("张小三2", 8, Guid.NewGuid().ToString(), GenderEnum.男),
+                new Person("张小三3", 8, Guid.NewGuid().ToString(), GenderEnum.男),
+                new Person("张小三4", 8, Guid.NewGuid().ToString(), GenderEnum.男)
+            };
+
+            person.Pet = new Pet() { Name = "旺财", Age = 3 };
+
+            personDB.Add(person);
         }
 
         /// <summary>

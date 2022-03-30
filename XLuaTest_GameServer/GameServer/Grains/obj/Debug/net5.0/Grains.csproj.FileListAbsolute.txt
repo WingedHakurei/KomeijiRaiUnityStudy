@@ -17,3 +17,5 @@ d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Grains\obj\Debug\net5
 d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Grains\obj\Debug\net5.0\Grains.dll
 d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Grains\obj\Debug\net5.0\ref\Grains.dll
 d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Grains\obj\Debug\net5.0\Grains.pdb
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Grains\bin\Debug\net5.0\Common.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Grains\bin\Debug\net5.0\Common.pdb

@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "wfThNx9H1GEI9qjanx4bMsw4xL7OFure71CP4qUAegwhZZAlZBFykUQ0XnFKxgU0vGHLxTT+wUUWK7Ncoeik+g==",
+  "dgSpecHash": "VmdAXjgFDNlHpGnlAFl3sLNRUBTMnfCdWJx0MP0zM8dslUh+Brmi866GBDSRBFh3jRMtFneU5vkMbg3Y7b3bmQ==",
   "success": true,
   "projectFilePath": "d:\\git\\KomeijiRaiUnityStudy\\XLuaTest_GameServer\\GameServer\\IGrains\\IGrains.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\狮子头零冲\\.nuget\\packages\\microsoft.orleans.codegenerator.msbuild\\3.5.0\\microsoft.orleans.codegenerator.msbuild.3.5.0.nupkg.sha512",
-    "C:\\Users\\狮子头零冲\\.nuget\\packages\\microsoft.orleans.core.abstractions\\3.5.0\\microsoft.orleans.core.abstractions.3.5.0.nupkg.sha512",
-    "C:\\Users\\狮子头零冲\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\狮子头零冲\\.nuget\\packages\\microsoft.orleans.codegenerator.msbuild\\3.6.0\\microsoft.orleans.codegenerator.msbuild.3.6.0.nupkg.sha512",
+    "C:\\Users\\狮子头零冲\\.nuget\\packages\\microsoft.orleans.core.abstractions\\3.6.0\\microsoft.orleans.core.abstractions.3.6.0.nupkg.sha512",
+    "C:\\Users\\狮子头零冲\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\狮子头零冲\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
   "logs": []

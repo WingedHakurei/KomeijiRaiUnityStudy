@@ -1,4 +1,5 @@
 using System;
+using Common;
 using DotNetty.Transport.Channels;
 using IGrains;
 using Orleans;
@@ -38,21 +39,21 @@ namespace GateServer.Net
 
             routerGrain.BindPacketObserver(observerRef).Wait();
 
-            Console.WriteLine($"{context.Channel.RemoteAddress.ToString()} 连接成功！");
+            Logger.Instance.Information($"{context.Channel.RemoteAddress.ToString()} 连接成功！");
         }
 
         public override void ChannelInactive(IChannelHandlerContext context)
         {
             base.ChannelInactive(context);
 
-            Console.WriteLine($"{context.Channel.RemoteAddress.ToString()} 连接断开！");
+            Logger.Instance.Information($"{context.Channel.RemoteAddress.ToString()} 连接断开！");
         }
 
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
             base.ExceptionCaught(context, exception);
 
-            Console.WriteLine($"{context.Channel.RemoteAddress.ToString()} 连接异常 {exception}！");
+            Logger.Instance.Information($"{context.Channel.RemoteAddress.ToString()} 连接异常 {exception}！");
         }
     }
 }

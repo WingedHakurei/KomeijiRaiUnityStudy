@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Common;
 using Google.Protobuf;
 using IGrains;
 
@@ -20,7 +21,7 @@ namespace Grains
 
             long id = GrainReference.GrainIdentity.PrimaryKeyLong;
 
-            Console.WriteLine($"CardServer {id} 收到 NetPackage");
+            Logger.Instance.Information($"CardServer {id} 收到 NetPackage");
 
             // 将消息再发回客户端
 
@@ -39,7 +40,7 @@ namespace Grains
 
                 observer.OnReceivePacket(netPackage);
 
-                Console.WriteLine($"CardServer {id} 发送 NetPackage");
+                Logger.Instance.Information($"CardServer {id} 发送 NetPackage");
             }
 
             return Task.CompletedTask;

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Common;
 using DotNetty.Buffers;
 using DotNetty.Handlers.Timeout;
 using DotNetty.Transport.Bootstrapping;
@@ -74,11 +75,11 @@ namespace GateServer.Net
 
                 bootstrapChannel = await bootstrap.BindAsync(8899);
 
-                Console.WriteLine($"启动网关服务器成功！监听端口号：8899");
+                Logger.Instance.Information($"启动网关服务器成功！监听端口号：8899");
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine(e.Message);
+                Logger.Instance.Error(e.Message);
 
                 throw new Exception("启动 TcpServer 失败！\n" + e.StackTrace);
             }
@@ -96,7 +97,7 @@ namespace GateServer.Net
                 workerGroup.ShutdownGracefullyAsync(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2))
             );
 
-            Console.WriteLine("关闭网关服务器成功！");
+            Logger.Instance.Information("关闭网关服务器成功！");
         }
 
     }

@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net5.0": {
-      "Google.Protobuf/3.19.0": {
+      "Google.Protobuf/3.19.4": {
         "type": "package",
         "compile": {
           "lib/net5.0/Google.Protobuf.dll": {}
@@ -14,14 +14,14 @@
     }
   },
   "libraries": {
-    "Google.Protobuf/3.19.0": {
-      "sha512": "WHfgqb0R6IaoB2bN18OkaDABA2bP4gz9NPYD41nKhaporyBclQlXThQtxGic7Hc4Ip0B/Avw6xZDjx9vb/3XuQ==",
+    "Google.Protobuf/3.19.4": {
+      "sha512": "fd07/ykL4O4FhqrZIELm5lmiyOHfdPg9+o+hWr6tcfRdS7tHXnImg/2wtogLzlW2eEmr0J7j6ZrZvaWOLiJbxQ==",
       "type": "package",
-      "path": "google.protobuf/3.19.0",
+      "path": "google.protobuf/3.19.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "google.protobuf.3.19.0.nupkg.sha512",
+        "google.protobuf.3.19.4.nupkg.sha512",
         "google.protobuf.nuspec",
         "lib/net45/Google.Protobuf.dll",
         "lib/net45/Google.Protobuf.pdb",
@@ -40,7 +40,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "google.protobuf >= 3.19.0"
+      "google.protobuf >= 3.19.4"
     ]
   },
   "packageFolders": {
@@ -91,7 +91,7 @@
         "dependencies": {
           "google.protobuf": {
             "target": "Package",
-            "version": "[3.19.0, )"
+            "version": "[3.19.4, )"
           }
         },
         "imports": [

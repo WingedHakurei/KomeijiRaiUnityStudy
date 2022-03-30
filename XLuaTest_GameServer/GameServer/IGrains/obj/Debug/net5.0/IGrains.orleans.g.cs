@@ -54,15 +54,15 @@ namespace IGrains
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("OrleansCodeGen", "2.0.0.0"), global::System.SerializableAttribute, global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute, global::Orleans.CodeGeneration.GrainReferenceAttribute(typeof(global::IGrains.IPacketObserver))]
     internal class OrleansCodeGenPacketObserverReference : global::Orleans.Runtime.GrainReference, global::IGrains.IPacketObserver
     {
-        OrleansCodeGenPacketObserverReference(global::Orleans.Runtime.GrainReference other): base(other)
+        OrleansCodeGenPacketObserverReference(global::Orleans.Runtime.GrainReference other) : base(other)
         {
         }
 
-        OrleansCodeGenPacketObserverReference(global::Orleans.Runtime.GrainReference other, global::Orleans.CodeGeneration.InvokeMethodOptions invokeMethodOptions): base(other, invokeMethodOptions)
+        OrleansCodeGenPacketObserverReference(global::Orleans.Runtime.GrainReference other, global::Orleans.CodeGeneration.InvokeMethodOptions invokeMethodOptions) : base(other, invokeMethodOptions)
         {
         }
 
-        OrleansCodeGenPacketObserverReference(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context): base(info, context)
+        OrleansCodeGenPacketObserverReference(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : base(info, context)
         {
         }
 
@@ -144,15 +144,15 @@ namespace IGrains
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("OrleansCodeGen", "2.0.0.0"), global::System.SerializableAttribute, global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute, global::Orleans.CodeGeneration.GrainReferenceAttribute(typeof(global::IGrains.IPacketRouterGrain))]
     internal class OrleansCodeGenPacketRouterGrainReference : global::Orleans.Runtime.GrainReference, global::IGrains.IPacketRouterGrain
     {
-        OrleansCodeGenPacketRouterGrainReference(global::Orleans.Runtime.GrainReference other): base(other)
+        OrleansCodeGenPacketRouterGrainReference(global::Orleans.Runtime.GrainReference other) : base(other)
         {
         }
 
-        OrleansCodeGenPacketRouterGrainReference(global::Orleans.Runtime.GrainReference other, global::Orleans.CodeGeneration.InvokeMethodOptions invokeMethodOptions): base(other, invokeMethodOptions)
+        OrleansCodeGenPacketRouterGrainReference(global::Orleans.Runtime.GrainReference other, global::Orleans.CodeGeneration.InvokeMethodOptions invokeMethodOptions) : base(other, invokeMethodOptions)
         {
         }
 
-        OrleansCodeGenPacketRouterGrainReference(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context): base(info, context)
+        OrleansCodeGenPacketRouterGrainReference(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : base(info, context)
         {
         }
 

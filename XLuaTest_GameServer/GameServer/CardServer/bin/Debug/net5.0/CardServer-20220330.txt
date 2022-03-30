@@ -1,0 +1,19 @@
+2022-03-30 19:49:47.056 +08:00 [INF] 开启 CardServer！
+2022-03-30 19:49:59.091 +08:00 [INF] CardServer 123 收到 NetPackage
+2022-03-30 19:49:59.141 +08:00 [INF] CardServer 123 发送 NetPackage
+2022-03-30 19:50:22.327 +08:00 [INF] CardServer 123 收到 NetPackage
+2022-03-30 19:50:22.328 +08:00 [INF] CardServer 123 发送 NetPackage
+2022-03-30 19:50:33.038 +08:00 [INF] CardServer 123 收到 NetPackage
+2022-03-30 19:50:33.039 +08:00 [INF] CardServer 123 发送 NetPackage
+2022-03-30 19:50:55.582 +08:00 [INF] CardServer 123 收到 NetPackage
+2022-03-30 19:50:55.583 +08:00 [INF] CardServer 123 发送 NetPackage
+2022-03-30 19:51:06.423 +08:00 [INF] 开启 CardServer！
+2022-03-30 19:51:21.191 +08:00 [INF] CardServer 123 收到 NetPackage
+2022-03-30 19:51:21.242 +08:00 [INF] CardServer 123 发送 NetPackage
+2022-03-30 21:28:10.713 +08:00 [INF] 开启 CardServer！
+2022-03-30 21:29:59.654 +08:00 [INF] 开启 CardServer！
+2022-03-30 21:32:46.164 +08:00 [INF] 开启 CardServer！
+2022-03-30 21:33:12.707 +08:00 [INF] CardServer 123 收到 NetPackage
+2022-03-30 21:33:12.754 +08:00 [INF] CardServer 123 发送 NetPackage
+2022-03-30 21:33:19.802 +08:00 [INF] CardServer 123 收到 NetPackage
+2022-03-30 21:33:19.803 +08:00 [INF] CardServer 123 发送 NetPackage

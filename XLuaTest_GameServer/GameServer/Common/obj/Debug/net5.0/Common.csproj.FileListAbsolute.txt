@@ -1,0 +1,12 @@
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\bin\Debug\net5.0\Common.deps.json
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\bin\Debug\net5.0\Common.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\bin\Debug\net5.0\ref\Common.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\bin\Debug\net5.0\Common.pdb
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\obj\Debug\net5.0\Common.csproj.AssemblyReference.cache
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\obj\Debug\net5.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\obj\Debug\net5.0\Common.AssemblyInfoInputs.cache
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\obj\Debug\net5.0\Common.AssemblyInfo.cs
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\obj\Debug\net5.0\Common.csproj.CoreCompileInputs.cache
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\obj\Debug\net5.0\Common.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\obj\Debug\net5.0\ref\Common.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\obj\Debug\net5.0\Common.pdb

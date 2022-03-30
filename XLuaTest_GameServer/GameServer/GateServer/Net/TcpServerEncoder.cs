@@ -1,4 +1,4 @@
-using System;
+using Common;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
@@ -18,7 +18,7 @@ namespace GateServer.Net
 
             output.WriteBytes(body);
 
-            Console.WriteLine($"{context.Channel.RemoteAddress.ToString()} 发送数据！");
+            Logger.Instance.Information($"{context.Channel.RemoteAddress.ToString()} 发送数据！");
         }
     }
 }

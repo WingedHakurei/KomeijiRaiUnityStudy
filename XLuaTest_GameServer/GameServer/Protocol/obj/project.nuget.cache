@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "kvbH0zx9+//lPFb8dHfpt6qS2GHrk71PwFIRXjgSimYtu5prQRQNQzJew2dU9UgPxqDR/z1HeO/txvJSqNzygQ==",
+  "dgSpecHash": "vgqi0nFiUsqv48n3nPH9A/SjamtXvWCtKlDXTD08jsm9inVKehjTe+78TuJq9XLuKZ0j89bWthUCowwC8sGT8g==",
   "success": true,
   "projectFilePath": "d:\\git\\KomeijiRaiUnityStudy\\XLuaTest_GameServer\\GameServer\\Protocol\\Protocol.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\狮子头零冲\\.nuget\\packages\\google.protobuf\\3.19.0\\google.protobuf.3.19.0.nupkg.sha512"
+    "C:\\Users\\狮子头零冲\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512"
   ],
   "logs": []
 }
