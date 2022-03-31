@@ -11,6 +11,12 @@ namespace Grains
         private IPacketObserver observer;
 
         /// <summary>
+        /// 记录此 Grain 对应的玩家是否在线
+        /// </summary>
+        /// <value></value>
+        public bool onLine { get; set; }
+
+        /// <summary>
         /// 当 CardServer 收到来自 GateServer 的消息
         /// </summary>
         /// <param name="netPackage"></param>
@@ -49,6 +55,28 @@ namespace Grains
         public Task BindPacketObserver(IPacketObserver observer)
         {
             this.observer = observer;
+
+            return Task.CompletedTask;
+        }
+
+        public Task OnLine()
+        {
+            onLine = true;
+
+            string account = GrainReference.GrainIdentity.PrimaryKeyString;
+
+            Logger.Instance.Information($"{account} 上线");
+
+            return Task.CompletedTask;
+        }
+
+        public Task OffLine()
+        {
+            onLine = false;
+
+            string account = GrainReference.GrainIdentity.PrimaryKeyString;
+
+            Logger.Instance.Information($"{account} 下线");
 
             return Task.CompletedTask;
         }

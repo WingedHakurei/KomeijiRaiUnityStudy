@@ -3,7 +3,7 @@ using Orleans;
 
 namespace IGrains
 {
-    public interface IPacketRouterGrain : IGrainWithIntegerKey
+    public interface IPacketRouterGrain : IGrainWithStringKey
     {
         /// <summary>
         /// 当 CardServer 收到来自 GateServer 的消息
@@ -18,5 +18,17 @@ namespace IGrains
         /// <param name="observer"></param>
         /// <returns></returns>
         Task BindPacketObserver(IPacketObserver observer);
+
+        /// <summary>
+        /// 网关通知：当前 Grain 对应的玩家上线了
+        /// </summary>
+        /// <returns></returns>
+        Task OnLine();
+
+        /// <summary>
+        /// 网关通知：当前 Grain 对应的玩家掉线了
+        /// </summary>
+        /// <returns></returns>
+        Task OffLine();
     }
 }

@@ -13,31 +13,23 @@ namespace GateServer.Net
     {
         private readonly IClusterClient client;
 
-        private IPacketRouterGrain routerGrain;
-
-        private PacketObserver packetObserver;
+        private Session session;
 
         public TcpServerHandler(IClusterClient client)
         {
             this.client = client;
         }
 
-        protected override void ChannelRead0(IChannelHandlerContext context, NetPackage netPackage)
+        protected override async void ChannelRead0(IChannelHandlerContext context, NetPackage netPackage)
         {
-            routerGrain.OnReceivePacket(netPackage);
+            await session.DispatchReceivePacket(netPackage);
         }
 
         public override void ChannelActive(IChannelHandlerContext context)
         {
             base.ChannelActive(context);
 
-            routerGrain = client.GetGrain<IPacketRouterGrain>(123);
-
-            packetObserver = new PacketObserver(context);
-
-            IPacketObserver observerRef = client.CreateObjectReference<IPacketObserver>(packetObserver).Result;
-
-            routerGrain.BindPacketObserver(observerRef).Wait();
+            session = new Session(client, context);
 
             Logger.Instance.Information($"{context.Channel.RemoteAddress.ToString()} 连接成功！");
         }
@@ -45,6 +37,8 @@ namespace GateServer.Net
         public override void ChannelInactive(IChannelHandlerContext context)
         {
             base.ChannelInactive(context);
+
+            session.Disconnect();
 
             Logger.Instance.Information($"{context.Channel.RemoteAddress.ToString()} 连接断开！");
         }
