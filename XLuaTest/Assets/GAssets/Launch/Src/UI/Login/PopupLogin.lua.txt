@@ -1,0 +1,84 @@
+PopupLogin = {}
+
+-- 登录弹出界面
+
+function PopupLogin:Awake()
+    -- 处理关闭按钮
+    local closeBtn = self.MonoProxy.transform:Find("Popup/Button_Close"):GetComponent(typeof(CS.UnityEngine.UI.Button))
+    closeBtn.onClick:AddListener(self.OnCloseBtn)
+
+    -- 处理跳转到注册按钮
+    local textSignup = self.MonoProxy.transform:Find("Popup/Text_Signup"):GetComponent(typeof(CS.UnityEngine.UI.Button))
+    textSignup.onClick:AddListener(self.OnTextSignup)
+
+    -- 处理账号输入框
+    self.AccountField = self.MonoProxy.transform:Find("Popup/AccountField"):GetComponent(typeof(CS.UnityEngine.UI
+                                                                                                    .InputField))
+
+    -- 处理密码输入框
+    self.PasswordField = self.MonoProxy.transform:Find("Popup/PasswordField"):GetComponent(typeof(CS.UnityEngine.UI
+                                                                                                      .InputField))
+
+    -- 处理请求登录按钮
+    local LoginBtn = self.MonoProxy.transform:Find("Popup/LoginBtn"):GetComponent(typeof(CS.UnityEngine.UI.Button))
+    LoginBtn.onClick:AddListener(self.OnLoginBtn)
+
+    -- 处理账号数据
+    if DataStoreMgr.account ~= nil then
+        self.AccountField.text = DataStoreMgr.account
+    end
+
+    -- 处理密码数据
+    if DataStoreMgr.password ~= nil then
+        self.PasswordField.text = DataStoreMgr.password
+    end
+end
+
+-- 当点击请求登录按钮
+function PopupLogin.OnLoginBtn()
+    local self = PopupLogin
+    local account = self.AccountField.text
+    local password = self.PasswordField.text
+    if account ~= nil and account ~= "" and password ~= nil and password ~= "" then
+        require "UI/Login/LoginMgr"
+        LoginMgr:Login(account, password)
+    end
+end
+
+function PopupLogin.OnCloseBtn()
+    local self = PopupLogin
+    -- 查找子物体
+    local popup = self.MonoProxy.transform:Find("Popup")
+
+    -- 使用dotween移动
+    local tween = popup.transform:DOLocalMove(CS.UnityEngine.Vector3(0, 1200, 0), 0.4)
+
+    -- 移动完成的回调
+    tween.onComplete = function()
+        CS.UnityEngine.Object.Destroy(self.MonoProxy.gameObject)
+    end
+end
+
+-- 当玩家点击跳转到注册界面
+function PopupLogin.OnTextSignup()
+    -- 先隐藏这个登录界面
+    PopupLogin.MonoProxy.gameObject:SetActive(false)
+
+    -- 再创建注册界面
+    require "UI/Login/LoginUI"
+    LoginUI:CreatePopupSignup(function(go)
+        -- 创建并移动好注册弹出框后，就把隐藏的登录弹出框销毁
+        CS.UnityEngine.Object.Destroy(PopupLogin.MonoProxy.gameObject)
+
+        -- 最后给创建出来的PopupSignup游戏对象绑定luajiaob
+        go:AddComponent(typeof(CS.MonoProxy)):BindScript("Launch", "UI/Login/PopupSignup")
+    end)
+end
+
+function PopupLogin:Start()
+end
+
+function PopupLogin:OnDestroy()
+end
+
+return PopupLogin

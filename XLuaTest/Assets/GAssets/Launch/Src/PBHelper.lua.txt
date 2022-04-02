@@ -1,0 +1,33 @@
+PBHelper = {}
+
+-- 加载PB文件
+function PBHelper:LoadPBFiles(gameObject)
+    local CreateAssetT = xlua.get_generic_method(CS.AssetLoader, "CreateAsset")
+    local CreateAsset = CreateAssetT(CS.UnityEngine.TextAsset)
+    local protoString = CreateAsset(CS.AssetLoader.Instance, "Launch",
+                            "Assets/GAssets/Launch/Res/Proto/LaunchPB.proto.txt", gameObject).text
+
+    local parser = (require("protoc")).new()
+
+    assert(parser:load(protoString, "LaunchPB.proto"))
+end
+
+-- 将table对象序列化成字节流
+function PBHelper:Encode(PBType, tableObject)
+    local pb = require "pb"
+    return assert(pb.encode(PBType, tableObject))
+end
+
+-- 将字节流反序列化成table对象
+function PBHelper:Decode(PBType, bytes)
+    local pb = require "pb"
+    return assert(pb.decode(PBType, bytes))
+end
+
+-- 工具函数 获得PB文件中的字符串枚举对应的数字
+function PBHelper:Enum(enumType, enumValues)
+    local pb = require "pb"
+    return pb.enum(enumType, enumValues)
+end
+
+return PBHelper

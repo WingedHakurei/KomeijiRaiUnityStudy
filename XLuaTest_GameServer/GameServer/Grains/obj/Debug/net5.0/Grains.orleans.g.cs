@@ -23,16 +23,20 @@ namespace OrleansGeneratedCode
 
         public void Populate(global::Orleans.Metadata.GrainClassFeature feature)
         {
+            feature.Classes.Add(new global::Orleans.Metadata.GrainClassMetadata(typeof(global::Grains.LoginGrain)));
             feature.Classes.Add(new global::Orleans.Metadata.GrainClassMetadata(typeof(global::Grains.PacketRouterGrain)));
         }
 
         public void Populate(global::Orleans.Serialization.SerializerFeature feature)
         {
+            feature.AddKnownType("Grains.LoginGrain,Grains", "Grains.LoginGrain");
             feature.AddKnownType("Grains.PacketRouterGrain,Grains", "Grains.PacketRouterGrain");
             feature.AddKnownType("Common.Logger,Common", "Common.Logger");
+            feature.AddKnownType("Common.DB.AccountDB,Common", "Common.DB.AccountDB");
             feature.AddKnownType("Common.DB.Person,Common", "Common.DB.Person");
             feature.AddKnownType("Common.DB.GenderEnum,Common", "Common.DB.GenderEnum");
             feature.AddKnownType("Common.DB.Pet,Common", "Common.DB.Pet");
+            feature.AddKnownType("Common.DB.UserDB,Common", "Common.DB.UserDB");
             feature.AddKnownType("Common.ORM.DBEntity,Common", "Common.ORM.DBEntity");
             feature.AddKnownType("Common.ORM.Table`1,Common", "Common.ORM.Table`1'1");
             feature.AddKnownType("Interop+IpHlpApi+FIXED_INFO,DnsClient", "<global namespace>.FIXED_INFO");
@@ -2121,6 +2125,12 @@ namespace OrleansGeneratedCode
             feature.AddKnownType("MongoDB.Libmongocrypt.Status,MongoDB.Libmongocrypt", "MongoDB.Libmongocrypt.Status");
             feature.AddKnownType("MongoDB.Libmongocrypt.StatusSafeHandle,MongoDB.Libmongocrypt", "MongoDB.Libmongocrypt.StatusSafeHandle");
             feature.AddKnownType("LaunchPB.ProtoCode,Protocol", "LaunchPB.ProtoCode");
+            feature.AddKnownType("LaunchPB.RegisterResult,Protocol", "LaunchPB.RegisterResult");
+            feature.AddKnownType("LaunchPB.LoginResult,Protocol", "LaunchPB.LoginResult");
+            feature.AddKnownType("LaunchPB.Register,Protocol", "LaunchPB.Register");
+            feature.AddKnownType("LaunchPB.RegisterResp,Protocol", "LaunchPB.RegisterResp");
+            feature.AddKnownType("LaunchPB.Login,Protocol", "LaunchPB.Login");
+            feature.AddKnownType("LaunchPB.LoginResp,Protocol", "LaunchPB.LoginResp");
             feature.AddKnownType("LaunchPB.Hero,Protocol", "LaunchPB.Hero");
             feature.AddKnownType("Serilog.ILogger,Serilog", "Serilog.ILogger");
             feature.AddKnownType("Serilog.LoggerConfiguration,Serilog", "Serilog.LoggerConfiguration");

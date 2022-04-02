@@ -102,3 +102,5 @@ d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\GateServer\bin\Debug\
 d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\GateServer\bin\Debug\net5.0\runtimes\linux\native\libmongocrypt.so
 d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\GateServer\bin\Debug\net5.0\runtimes\osx\native\libmongocrypt.dylib
 d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\GateServer\bin\Debug\net5.0\runtimes\win\native\mongocrypt.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\GateServer\bin\Debug\net5.0\Protocol.dll
+d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\GateServer\bin\Debug\net5.0\Protocol.pdb

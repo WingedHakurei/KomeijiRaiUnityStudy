@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Common;
 using GateServer.Net;
 using Orleans;
@@ -23,6 +24,8 @@ namespace GateServer
             tcpServer = new TcpServer(client);
 
             await tcpServer.StartAsync();
+
+            Console.ReadKey();
         }
 
         /// <summary>

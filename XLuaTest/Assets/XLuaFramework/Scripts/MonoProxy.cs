@@ -26,7 +26,9 @@ public class MonoProxy : MonoBehaviour
     {
         Main.Instance.luaEnv.DoString("require '" + scriptPath + "'");
 
-        luaTable = Main.Instance.luaEnv.Global.Get<LuaTable>(scriptPath);
+        string[] strArray = scriptPath.Split('/');
+
+        luaTable = Main.Instance.luaEnv.Global.Get<LuaTable>(strArray[strArray.Length - 1]);
 
         // 给这个 luaTable 对象添加一个字段指向这个 c# 的 MonoProxy 对象
 

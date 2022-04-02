@@ -43,6 +43,7 @@ namespace Grains
 
             if (string.IsNullOrEmpty(login.Account) || string.IsNullOrEmpty(login.Password))
             {
+                Logger.Instance.Error("账号或密码为空");
                 return Task.FromResult(new NetPackage()
                 {
                     protoID = (int)ProtoCode.ELoginResp,
@@ -57,6 +58,7 @@ namespace Grains
 
             if (list == null || list.Count == 0)
             {
+                Logger.Instance.Error($"账号{login.Account}不存在");
                 return Task.FromResult(new NetPackage()
                 {
                     protoID = (int)ProtoCode.ELoginResp,
@@ -71,6 +73,7 @@ namespace Grains
 
             if (md5Str != list[0].MD5str)
             {
+                Logger.Instance.Error($"{login.Account} 密码错误");
                 return Task.FromResult(new NetPackage()
                 {
                     protoID = (int)ProtoCode.ELoginResp,
@@ -105,6 +108,7 @@ namespace Grains
         /// <returns></returns>
         public Task<NetPackage> OnRegister(NetPackage netPackage)
         {
+            Logger.Instance.Information("开始注册");
             IMessage message = new Register();
 
             Register register = message.Descriptor.Parser.ParseFrom(
@@ -114,6 +118,7 @@ namespace Grains
 
             if (string.IsNullOrEmpty(register.Account) || register.Account.Length > 32)
             {
+                Logger.Instance.Error("账号名字不合法");
                 return Task.FromResult(new NetPackage()
                 {
                     protoID = (int)ProtoCode.ERegisterResp,
@@ -126,6 +131,7 @@ namespace Grains
 
             if (string.IsNullOrEmpty(register.Password) || register.Password.Length > 32)
             {
+                Logger.Instance.Error("账号密码不合法");
                 return Task.FromResult(new NetPackage()
                 {
                     protoID = (int)ProtoCode.ERegisterResp,
@@ -140,6 +146,7 @@ namespace Grains
 
             if (list != null && list.Count > 0)
             {
+                Logger.Instance.Error("账号名字已经被其他人占用");
                 return Task.FromResult(new NetPackage()
                 {
                     protoID = (int)ProtoCode.ERegisterResp,

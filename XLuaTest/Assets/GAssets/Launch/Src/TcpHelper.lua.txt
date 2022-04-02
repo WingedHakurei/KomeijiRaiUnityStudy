@@ -1,0 +1,47 @@
+TcpHelper = {}
+
+-- Tcp网络的启动
+function TcpHelper:TcpConnect(OnTcpPacket, OnConnectSuccess, OnConnectFailed, OnConnectDisconnect)
+    self.client = CS.TCPClient()
+    self.client:Connect("127.0.0.1", 8899)
+
+    self.OnTcpPacket = OnTcpPacket
+    self.OnConnectSuccess = OnConnectSuccess
+    self.OnConnectFailed = OnConnectFailed
+    self.OnConnectDisconnect = OnConnectDisconnect
+end
+
+-- Tcp网络的Update
+function TcpHelper:TCPUpdate()
+    if self.client ~= nil then
+        local packets = self.client:GetPackets()
+        for i = 0, packets.Count - 1 do
+            local packet = packets[i]
+            if packet.packetType == CS.PacketType.TcpPacket then
+                self.OnTcpPacket(packet)
+            elseif packet.packetType == CS.PacketType.ConnectSuccess then
+                self.OnConnectSuccess(packet)
+            elseif packet.packetType == CS.PacketType.ConnectFailed then
+                self.OnConnectFailed(packet)
+            elseif packet.packetType == CS.PacketType.ConnectDisconnect then
+                self.OnConnectDisconnect(packet)
+            end
+        end
+    end
+end
+
+-- Tcp发送数据包到服务器
+function TcpHelper:SendAsync(protoCode, bodyData)
+    if self.client ~= nil then
+        self.client:SendAsync(protoCode, bodyData)
+    end
+end
+
+-- Tcp的网络的销毁
+function TcpHelper:TCPDestroy()
+    if self.client ~= nil then
+        self.client:Disconnect()
+    end
+end
+
+return TcpHelper

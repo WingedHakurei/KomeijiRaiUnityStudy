@@ -301,8 +301,14 @@
     <Reference Include="unityplastic">
         <HintPath>D:\git\KomeijiRaiUnityStudy\XLuaTest\Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
+    <Reference Include="DOTweenEditor">
+        <HintPath>D:\git\KomeijiRaiUnityStudy\XLuaTest\Assets\XLuaFramework\External\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
     <Reference Include="log4netPlastic">
         <HintPath>D:\git\KomeijiRaiUnityStudy\XLuaTest\Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+        <HintPath>D:\git\KomeijiRaiUnityStudy\XLuaTest\Assets\XLuaFramework\External\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="LitJSON">
         <HintPath>D:\git\KomeijiRaiUnityStudy\XLuaTest\Assets\XLuaFramework\External\LitJSON.dll</HintPath>
@@ -673,14 +679,14 @@
     <Reference Include="Unity.TextMeshPro.Editor">
         <HintPath>D:\git\KomeijiRaiUnityStudy\XLuaTest\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-        <HintPath>D:\git\KomeijiRaiUnityStudy\XLuaTest\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Timeline">
         <HintPath>D:\git\KomeijiRaiUnityStudy\XLuaTest\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
         <HintPath>D:\git\KomeijiRaiUnityStudy\XLuaTest\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+        <HintPath>D:\git\KomeijiRaiUnityStudy\XLuaTest\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>D:\git\KomeijiRaiUnityStudy\XLuaTest\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
@@ -696,6 +702,10 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{80a33612-d2e5-e30a-a848-1bc41908c41d}</Project>
       <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniRx.csproj">
+      <Project>{4836b213-d39e-db6a-3a83-08f2ce935b52}</Project>
+      <Name>UniRx</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,22 @@
+DataStoreMgr = {}
+
+-- 数据持久存储，存储在磁盘
+
+-- 全局函数
+function DataStoreMgr_SaveAll()
+    local rapidjson = require('rapidjson')
+    local stringInfo = rapidjson.encode(DataStoreMgr)
+    CS.UnityEngine.PlayerPrefs.SetString("DataStoreMgr", stringInfo)
+end
+
+-- 全局函数
+function DataStoreMgr_ReadAll()
+    local stringInfo = CS.UnityEngine.PlayerPrefs.GetString("DataStoreMgr")
+    if stringInfo ~= nil and stringInfo ~= "" then
+        print(stringInfo)
+        local rapidjson = require('rapidjson')
+        DataStoreMgr = rapidjson.decode(stringInfo)
+    end
+end
+
+return DataStoreMgr

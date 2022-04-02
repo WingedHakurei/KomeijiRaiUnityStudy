@@ -5,6 +5,7 @@ AssemblyName:Grains
 OutputType:Library
 TargetPath:d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Grains\bin\Debug\net5.0\Grains.dll
 CodeGenOutputFile:d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Grains\obj\Debug\net5.0\Grains.orleans.g.cs
+Compile:d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Grains\LoginGrain.cs
 Compile:d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Grains\PacketRouterGrain.cs
 Reference:d:\git\KomeijiRaiUnityStudy\XLuaTest_GameServer\GameServer\Common\bin\Debug\net5.0\Common.dll
 Reference:C:\Users\狮子头零冲\.nuget\packages\dnsclient\1.6.0\lib\net5.0\DnsClient.dll
@@ -176,4 +177,4 @@ Reference:C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5
 Reference:C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Xml.XPath.XDocument.dll
 Reference:C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\WindowsBase.dll
 DefineConstants:TRACE,DEBUG,NET,NET5_0,NETCOREAPP
-InputHash:ba77fd8ffcdd1e1d423fb74bc75e442c832653dd
+InputHash:96a30db8486751dfcf42b1e720208f3745c69d8c

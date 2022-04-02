@@ -1,42 +1,20 @@
 Main = {}
 
 function Main:Awake()
-    self.MonoProxy:BindUpdate(function()
-        Main.testTable:TCPUpdate()
-    end)
+    -- 读取硬盘缓存数据
+    require "Base/DataStoreMgr"
+    DataStoreMgr_ReadAll()
+
+    require "Base/NetworkMgr"
+    NetworkMgr:ConnectServer()
 end
 
 function Main:Start()
-    self.testTable = require "TestTable"
 
-    self.testTable:TCPConnect(self.OnTcpPacket, self.OnConnectSuccess, self.OnConnectFailed, self.OnConnectDisconnect)
-end
-
--- 当收到网络包
-function Main.OnTcpPacket(packet)
-    print("收到数据包")
-end
-
--- 当连接成功时
-function Main.OnConnectSuccess()
-    print("OnConnectSuccess")
-    -- 发送测试网络包
-    local body = Main.testTable:TestCreatePB(Main.MonoProxy.gameObject)
-    Main.testTable.client:SendAsync(1, body)
-end
-
--- 当连接失败时
-function Main.OnConnectFailed()
-    print("OnConnectFailed")
-end
-
--- 当连接断开时
-function Main.OnConnectDisconnect()
-    print("OnConnectDisconnect")
 end
 
 function Main:OnDestroy()
-    self.testTable:TCPDestroy()
+    NetworkMgr:Destroy()
 end
 
 return Main

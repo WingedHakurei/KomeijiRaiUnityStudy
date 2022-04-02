@@ -1,0 +1,76 @@
+LoginMgr = {}
+
+-- Login的控制器
+
+-- 加载登录的界面UI
+function LoginMgr:Load()
+    self.loginUI = CS.AssetLoader.Instance:Clone("Launch", "Assets/GAssets/Launch/Res/UI/Login/Prefab/LoginUI.prefab")
+    self.loginUI:AddComponent(typeof(CS.MonoProxy)):BindScript("Launch", "UI/Login/LoginUI")
+
+    require "Base/NetworkMgr"
+    NetworkMgr:Register("E_LoginResp", self.OnLoginResp)
+    NetworkMgr:Register("E_RegisterResp", self.OnRegisterResp)
+end
+
+-- 卸载登录的界面UI
+function LoginMgr:Unload()
+    CS.UnityEngine.Object.Destroy(self.loginUI)
+
+    require "Base/NetworkMgr"
+    NetworkMgr:UnRegister("E_LoginResp")
+    NetworkMgr:UnRegister("E_RegisterResp")
+end
+
+-- 向服务器发送账号登录协议
+function LoginMgr:Login(account, password)
+    require "Base/NetworkMgr"
+    local protoCode = NetworkMgr.pbHelper:Enum("LaunchPB.ProtoCode", "E_Login")
+    local protoBody = NetworkMgr.pbHelper:Encode("LaunchPB.Login", {
+        account = account,
+        password = password
+    })
+    NetworkMgr.tcpHelper:SendAsync(protoCode, protoBody)
+    print("发送账号登录请求协议..")
+end
+
+-- 账号登录返回消息
+function LoginMgr:OnLoginResp(dataBody)
+    local loginResp = NetworkMgr.pbHelper:Decode("LaunchPB.LoginResp", dataBody)
+    print("loginResp.result: " .. loginResp.result)
+    if loginResp.result == "E_LoginSuccess" then
+        -- 记住这个账号到硬盘
+        require "Base/DataStoreMgr"
+        DataStoreMgr.account = loginResp.account
+        DataStoreMgr.password = loginResp.password
+        DataStoreMgr_SaveAll()
+        -- 卸载整个LoginMgr
+        LoginMgr:Unload()
+    end
+end
+
+-- 向服务器发送账号注册协议
+function LoginMgr:Register(account, password)
+    require "Base/NetworkMgr"
+    local protoCode = NetworkMgr.pbHelper:Enum("LaunchPB.ProtoCode", "E_Register")
+    local protoBody = NetworkMgr.pbHelper:Encode("LaunchPB.Register", {
+        account = account,
+        password = password
+    })
+    NetworkMgr.tcpHelper:SendAsync(protoCode, protoBody)
+    print("发送账号注册请求协议..")
+end
+
+-- 账号注册返回消息
+function LoginMgr:OnRegisterResp(dataBody)
+    local registerResp = NetworkMgr.pbHelper:Decode("LaunchPB.RegisterResp", dataBody)
+    print(registerResp.account .. " " .. registerResp.password)
+    print("registerResp.result = " .. registerResp.result)
+    if registerResp.result == "E_RegisterSuccess" then
+        -- 账号注册成功 直接登录
+        LoginMgr:Login(registerResp.account, registerResp.password)
+    else
+        -- 账号注册失败
+    end
+end
+
+return LoginMgr
